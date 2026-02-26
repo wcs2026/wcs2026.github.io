@@ -768,7 +768,7 @@ function goTo(q) {
   window.scrollTo(0,0);
 }
 
-function showResult() {
+async function showResult() {
   ans.open = document.getElementById('open-answer')?.value || '';
   const card = document.getElementById('result-card');
   card.innerHTML = `
@@ -780,6 +780,23 @@ function showResult() {
   `;
   document.getElementById('progress').style.width = '100%';
   show('result');
+
+  // Formspree'ye gönder
+  try {
+    await fetch('https://formspree.io/f/mbdawbqv', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        'Seçilen Marka': ans.brand,
+        'Alt Başlık': ans.sub,
+        'His': ans.feeling || 'Belirtilmedi',
+        'Çağrışım': ans.open || 'Belirtilmedi',
+        'Persona': ans.persona || 'Belirtilmedi'
+      })
+    });
+  } catch(e) {
+    // sessizce geç
+  }
 }
 
 function restart() {
