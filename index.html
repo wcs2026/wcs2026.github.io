@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Marka Anketi</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,200;0,300;0,400;0,500;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,200;0,300;0,400;0,500;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Italiana&family=Josefin+Sans:wght@100;200;300&family=Barlow+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -79,7 +79,7 @@ body {
   line-height: 1.9;
   max-width: 400px;
   font-weight: 300;
-  margin: 0 auto 48px;
+  margin: 0 auto 32px;
   position: relative; z-index: 1;
 }
 .start-btn {
@@ -201,154 +201,141 @@ body {
   z-index: 10;
 }
 
-/* NÖTR — Beyaz zemin, siyah yazı */
+/* NÖTR — N1 Saf Beyaz Minimal */
 .bc-notr {
   background: #ffffff;
   position: relative;
 }
-.bc-notr::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg, transparent, transparent 19px, rgba(0,0,0,0.04) 19px, rgba(0,0,0,0.04) 20px
-  );
-}
 .bc-notr .bn-name {
-  font-family: 'Bebas Neue', cursive;
-  font-size: 3rem;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 100;
+  font-size: 2.6rem;
   color: #0a0a0a;
-  letter-spacing: 8px;
+  letter-spacing: 12px;
   position: relative; z-index: 1;
   line-height: 1;
 }
 .bc-notr .bn-sub {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 0.65rem;
-  color: #999;
-  letter-spacing: 2px;
-  margin-top: 6px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 400;
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  color: #222;
+  text-transform: none;
+  margin-top: 8px;
   position: relative; z-index: 1;
 }
 .bc-notr .bn-line {
-  width: 32px; height: 1px;
-  background: rgba(0,0,0,0.15);
+  width: 28px; height: 1px;
+  background: #ddd;
   margin: 8px 0;
   position: relative; z-index: 1;
 }
 
-/* ZENO — Deep Forest & Warm Gold */
+/* ZENO — Açık krem arka plan, koyu yazı, Italiana font */
 .bc-zeno {
-  background: #1e2a1a;
+  background: #f2ede0;
   position: relative;
   overflow: hidden;
 }
 .bc-zeno::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at top, rgba(180,144,80,0.1) 0%, transparent 60%);
+  inset: 10px;
+  border: 1px solid rgba(60,40,20,0.1);
+  border-radius: 2px;
+  pointer-events: none;
 }
 .bc-zeno .bz-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.8rem;
-  font-weight: 600;
-  color: #c8a86a;
-  letter-spacing: 6px;
+  font-family: 'Italiana', serif;
+  font-size: 3rem;
+  color: #2a1e0a;
+  letter-spacing: 8px;
   position: relative; z-index: 1;
   line-height: 1;
 }
 .bc-zeno .bz-sub {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 0.7rem;
-  color: rgba(200,168,106,0.5);
+  font-family: 'Italiana', serif;
+  font-size: 1rem;
   letter-spacing: 3px;
+  color: rgba(60,40,20,0.85);
+  text-transform: none;
   margin-top: 8px;
   position: relative; z-index: 1;
 }
-.bc-zeno .bz-sprig {
-  position: absolute;
-  bottom: 12px; right: 14px;
-  font-size: 1.2rem;
-  opacity: 0.3;
-}
+.bc-zeno .bz-sprig { display: none; }
 
-/* KIVO — Warm Terracotta */
+/* KIVO — K2 Beyaz Keskin */
 .bc-kivo {
-  background: #2a1208;
+  background: #f8f8f6;
   position: relative;
   overflow: hidden;
 }
-.bc-kivo::before {
+.bc-kivo::after {
   content: '';
   position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at bottom left, rgba(220,100,50,0.15) 0%, transparent 60%);
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: #1a1a1a;
 }
 .bc-kivo .bk-name {
-  font-family: 'Lora', serif;
+  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 600;
-  font-size: 2.8rem;
-  color: #e8c090;
-  letter-spacing: 4px;
+  font-size: 3rem;
+  color: #1a1a1a;
+  letter-spacing: 6px;
   position: relative; z-index: 1;
   line-height: 1;
 }
 .bc-kivo .bk-sub {
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 300;
-  font-size: 0.6rem;
-  color: rgba(232,192,144,0.5);
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  margin-top: 8px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 400;
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  color: #333;
+  text-transform: none;
+  margin-top: 6px;
   position: relative; z-index: 1;
 }
 .bc-kivo .bk-dot {
-  width: 5px; height: 5px;
-  background: #e8c090;
-  border-radius: 50%;
-  margin: 6px 0;
-  opacity: 0.4;
+  width: 28px; height: 1px;
+  background: rgba(26,26,26,0.15);
+  margin: 8px 0;
+  border-radius: 0;
+  opacity: 1;
   position: relative; z-index: 1;
 }
 
-/* MOYA — Soft Ivory & Earth */
+/* MOYA — M5 Taş Minimal */
 .bc-moya {
-  background: #fff;
+  background: #f5f3ef;
   position: relative;
 }
-.bc-moya::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at top right, rgba(180,144,106,0.1) 0%, transparent 60%);
-}
 .bc-moya .bm-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.8rem;
-  color: #3a2818;
-  letter-spacing: 3px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 200;
+  font-size: 2.4rem;
+  color: #2a2820;
+  letter-spacing: 10px;
   position: relative; z-index: 1;
   line-height: 1;
 }
 .bc-moya .bm-sub {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 0.75rem;
-  color: #b4906a;
-  letter-spacing: 2px;
-  margin-top: 6px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 400;
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  color: #222;
+  text-transform: none;
+  margin-top: 8px;
   position: relative; z-index: 1;
 }
 .bc-moya .bm-arc {
   position: absolute;
   bottom: 0; left: 0; right: 0;
-  height: 40px;
-  background: rgba(180,144,106,0.08);
-  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  height: 2px;
+  background: rgba(42,40,32,0.12);
+  border-radius: 0;
 }
 
 .bc-info {
@@ -573,15 +560,16 @@ body {
 
 <!-- INTRO -->
 <div class="screen active" id="intro">
-  <div class="intro-eyebrow">Marka Araştırması · 2025</div>
+  <div class="intro-eyebrow">Marka Araştırması · 2026</div>
   <h1>Sana bir marka<br>göstermek istiyoruz.</h1>
   <p>Dört farklı isim, dört farklı his. Hangisi seni durdurur? Hangisi senin için yapılmış gibi hissettiriyor? 2 dakikan var.</p>
-  <button class="start-btn" onclick="startSurvey()">Başla →</button>
+  <p style="font-size:0.75rem; color:#c4b4a0; margin-top:-32px; margin-bottom:0;">🔒 Cevapların tamamen anonimdir, kişisel bilgi toplanmaz.</p>
+  <button class="start-btn" style="margin-top:24px;" onclick="startSurvey()">Başla →</button>
   <div class="brand-chips">
     <div class="b-chip">NÖTR</div>
     <div class="b-chip">ZENO</div>
     <div class="b-chip">KIVO</div>
-    <div class="b-chip">Moya</div>
+    <div class="b-chip">MOYA</div>
   </div>
 </div>
 
@@ -594,6 +582,9 @@ body {
       <div class="q-step">Soru 1 / 4</div>
       <div class="q-title">Hangi marka seni durdurdu?</div>
       <div class="q-hint">İlk içgüdünle seç</div>
+      <div style="margin-top:10px; padding:10px 16px; background:rgba(42,32,24,0.06); border-radius:10px; font-size:0.72rem; color:#9a8a70; line-height:1.6; max-width:500px; margin-left:auto; margin-right:auto;">
+        💡 <strong>Not:</strong> Logo veya tasarıma değil, sadece <strong>marka ismine</strong> odaklan. Renk ve font geçici — isim kalıcı.
+      </div>
     </div>
     <div class="brand-cards">
 
@@ -601,7 +592,6 @@ body {
         <div class="bc-check">✓</div>
         <div class="bc-visual bc-notr">
           <div class="bn-name">NÖTR</div>
-          <div class="bn-line"></div>
           <div class="bn-sub">You, But Better</div>
         </div>
         <div class="bc-info" style="background:#fff; border-top-color:rgba(0,0,0,0.06)">
@@ -615,11 +605,10 @@ body {
         <div class="bc-visual bc-zeno">
           <div class="bz-name">ZENO</div>
           <div class="bz-sub">Refined Snacks</div>
-          <div class="bz-sprig">🌿</div>
         </div>
-        <div class="bc-info">
-          <div class="bi-name">ZENO</div>
-          <div class="bi-desc">Premium, doğal, usta ellerden</div>
+        <div class="bc-info" style="background:#f2ede0; border-top-color:rgba(60,40,20,0.08)">
+          <div class="bi-name" style="color:#2a1e0a">ZENO</div>
+          <div class="bi-desc" style="color:#9a7a50">Premium, doğal, usta ellerden</div>
         </div>
       </div>
 
@@ -627,7 +616,6 @@ body {
         <div class="bc-check">✓</div>
         <div class="bc-visual bc-kivo">
           <div class="bk-name">KIVO</div>
-          <div class="bk-dot"></div>
           <div class="bk-sub">The Smarter Snack</div>
         </div>
         <div class="bc-info">
@@ -636,16 +624,16 @@ body {
         </div>
       </div>
 
-      <div class="brand-card" onclick="selectBrand(this,'Moya','Snack with Purpose')">
+      <div class="brand-card" onclick="selectBrand(this,'MOYA','Snack with Purpose')">
         <div class="bc-check">✓</div>
         <div class="bc-visual bc-moya">
+          <div class="bm-name">MOYA</div>
           <div class="bm-arc"></div>
-          <div class="bm-name">Moya</div>
           <div class="bm-sub">Snack with Purpose</div>
         </div>
-        <div class="bc-info">
-          <div class="bi-name">MOYA</div>
-          <div class="bi-desc">Organik, sıcak, amaçlı beslenme</div>
+        <div class="bc-info" style="background:#f5f3ef; border-top-color:rgba(42,40,32,0.08)">
+          <div class="bi-name" style="color:#2a2820">MOYA</div>
+          <div class="bi-desc" style="color:#9a9590">Organik, sıcak, amaçlı beslenme</div>
         </div>
       </div>
 
