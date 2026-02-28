@@ -105,7 +105,7 @@ input[type=range]::-webkit-slider-thumb:hover { transform:scale(1.15); }
 /* ══ BRAND VISUALS ══ */
 /* ALL BRAND VISUALS — identical font/color/bg to eliminate bias */
 .vis-notr, .vis-zeno, .vis-kivo, .vis-moya, .vis-nuka {
-  background: #f5f3ef !important;
+  background: #ffffff !important;
 }
 .vis-kivo::after { display:none; }
 .vis-notr .vname, .vis-zeno .vname, .vis-kivo .vname, .vis-moya .vname, .vis-nuka .vname {
@@ -133,7 +133,7 @@ input[type=range]::-webkit-slider-thumb:hover { transform:scale(1.15); }
 }
 .pick-card:hover { border-color:#b4906a; transform:translateY(-2px); }
 .pick-card.sel { border-color:#8a6a40; box-shadow:0 4px 20px rgba(42,32,24,0.12); }
-.pc-visual { height:100px; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+.pc-visual { aspect-ratio:1/1; width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; overflow:hidden; padding:12px; }
 .pc-info { padding:10px 10px 12px; border-top:1px solid rgba(42,32,24,0.06); }
 .pc-name { font-size:0.7rem; font-weight:500; color:#3a2818; }
 .pc-desc { font-size:0.6rem; color:#b4906a; font-weight:300; margin-top:2px; line-height:1.4; }
@@ -162,6 +162,8 @@ input[type=range]::-webkit-slider-thumb:hover { transform:scale(1.15); }
 .next-btn.on:hover { background:#3d3020; transform:translateY(-2px); }
 .skip-btn { padding:14px 24px; background:transparent; border:1px solid rgba(42,32,24,0.15); color:#9a8a70; border-radius:100px; font-family:'DM Sans',sans-serif; font-size:0.8rem; cursor:pointer; transition:all 0.2s; }
 .skip-btn:hover { border-color:#8a6a40; }
+.back-btn { padding:14px 24px; background:transparent; border:none; color:#c4b4a0; font-family:'DM Sans',sans-serif; font-size:0.8rem; cursor:pointer; transition:all 0.2s; letter-spacing:1px; }
+.back-btn:hover { color:#8a6a40; }
 
 /* ══ RESULT ══ */
 #result {
@@ -196,13 +198,7 @@ input[type=range]::-webkit-slider-thumb:hover { transform:scale(1.15); }
   <p>Beş farklı isim, beş farklı his. Hangisi seni durdurur? 3 dakikan var.</p>
   <p style="font-size:0.75rem;color:#c4b4a0;margin-top:-24px;margin-bottom:0;">🔒 Cevapların tamamen anonimdir, kişisel bilgi toplanmaz.</p>
   <button class="start-btn" style="margin-top:24px;" onclick="startSurvey()">Başla →</button>
-  <div class="brand-chips">
-    <div class="b-chip">NÖTR</div>
-    <div class="b-chip">ZENO</div>
-    <div class="b-chip">KIVO</div>
-    <div class="b-chip">MOYA</div>
-    <div class="b-chip">NUKA</div>
-  </div>
+
 </div>
 
 <!-- SURVEY -->
@@ -246,6 +242,7 @@ input[type=range]::-webkit-slider-thumb:hover { transform:scale(1.15); }
     </div>
 
     <div class="q-nav">
+      <button class="back-btn" onclick="showScreen('intro')">← Geri</button>
       <button class="next-btn" id="next-s1" onclick="goSlider(0)">Devam →</button>
     </div>
   </div>
@@ -277,6 +274,7 @@ input[type=range]::-webkit-slider-thumb:hover { transform:scale(1.15); }
     </div>
 
     <div class="q-nav">
+      <button class="back-btn" id="back-s2" onclick="goBack('s2')">← Geri</button>
       <button class="next-btn" id="next-s2" onclick="nextSlider()">Devam →</button>
     </div>
   </div>
@@ -286,29 +284,9 @@ input[type=range]::-webkit-slider-thumb:hover { transform:scale(1.15); }
     <div class="q-step">Adım 3 / 5</div>
     <div class="q-title">Bir isim seçecek olsan,<br>hangisini seçerdin?</div>
     <div class="q-hint">Raf önünde duruyorsun — ilk içgüdün ne?</div>
-
-    <div class="pick-cards" id="pick-cards">
-      <div class="pick-card" onclick="selectPick(this,'NÖTR')">
-        <div class="pc-visual vis-notr"><div class="vname">NÖTR</div><div class="vsub">Smart Snacking</div></div>
-        </div>
-      <div class="pick-card" onclick="selectPick(this,'ZENO')">
-        <div class="pc-visual vis-zeno"><div class="vname">ZENO</div><div class="vsub">Smart Snacking</div></div>
-        </div>
-      <div class="pick-card" onclick="selectPick(this,'KIVO')">
-        <div class="pc-visual vis-kivo"><div class="vname">KIVO</div><div class="vsub">Smart Snacking</div></div>
-        </div>
-      <div class="pick-card" onclick="selectPick(this,'MOYA')">
-        <div class="pc-visual vis-moya"><div class="vname">MOYA</div><div class="vsub">Smart Snacking</div></div>
-        </div>
-      <div class="pick-card" onclick="selectPick(this,'NUKA')">
-        <div class="pc-visual vis-nuka"><div class="vname">NUKA</div><div class="vsub">Smart Snacking</div></div>
-        </div>
-      <div class="pick-card pc-none" onclick="selectPick(this,'none')">
-        <div class="pc-visual" style="background:#f8f8f8;"><div class="pc-none-text">Hiçbirini<br>Beğenmedim</div></div>
-        </div>
-      </div>
-
+    <div class="pick-cards" id="pick-cards"></div>
     <div class="q-nav">
+      <button class="back-btn" onclick="goBack('s3')">← Geri</button>
       <button class="next-btn" id="next-s3" onclick="goFromPick()">Devam →</button>
     </div>
   </div>
@@ -320,6 +298,7 @@ input[type=range]::-webkit-slider-thumb:hover { transform:scale(1.15); }
     <div class="q-hint">Aklına gelen her şeyi yazabilirsin</div>
     <textarea class="open-input" id="name-suggestion" placeholder="İsim fikrin, beklentin, ne hissettirdi..."></textarea>
     <div class="q-nav">
+      <button class="back-btn" onclick="goBack('s4a')">← Geri</button>
       <button class="next-btn on" onclick="submitSurvey()">Gönder →</button>
       <button class="skip-btn" onclick="submitSurvey()">Geç</button>
     </div>
@@ -332,6 +311,7 @@ input[type=range]::-webkit-slider-thumb:hover { transform:scale(1.15); }
     <div class="q-hint">Bir kelime bile yeter</div>
     <textarea class="open-input" id="association" placeholder="Aklına ilk gelen şeyi yaz..."></textarea>
     <div class="q-nav">
+      <button class="back-btn" onclick="goBack('s4b')">← Geri</button>
       <button class="next-btn on" onclick="submitSurvey()">Gönder →</button>
       <button class="skip-btn" onclick="submitSurvey()">Geç</button>
     </div>
@@ -483,6 +463,7 @@ function nextSlider() {
   if (sliderIdx < shuffledBrands.length - 1) {
     goSlider(sliderIdx + 1);
   } else {
+    renderPickCards();
     showStep('s3');
     setProgress(72);
   }
@@ -491,11 +472,47 @@ function nextSlider() {
 // ═══════════════════════════════════════
 // S3: SEÇİM
 // ═══════════════════════════════════════
+function renderPickCards() {
+  const container = document.getElementById('pick-cards');
+  const shuffled = shuffle(brands);
+  container.innerHTML = '';
+  shuffled.forEach(b => {
+    const div = document.createElement('div');
+    div.className = 'pick-card';
+    div.onclick = function() { selectPick(this, b.id); };
+    div.innerHTML = `<div class="pc-visual ${b.cls}"><div class="vname">${b.id}</div><div class="vsub">Smart Snacking</div></div>`;
+    container.appendChild(div);
+  });
+  // None card always last
+  const none = document.createElement('div');
+  none.className = 'pick-card pc-none';
+  none.onclick = function() { selectPick(this, 'none'); };
+  none.innerHTML = `<div class="pc-visual" style="background:#f8f8f8;"><div class="pc-none-text">Hiçbirini<br>Beğenmedim</div></div>`;
+  container.appendChild(none);
+}
+
 function selectPick(el, val) {
   document.querySelectorAll('.pick-card').forEach(c => c.classList.remove('sel'));
   el.classList.add('sel');
   answers.pick = val;
   document.getElementById('next-s3').classList.add('on');
+}
+
+function goBack(from) {
+  if (from === 's2') {
+    if (sliderIdx > 0) {
+      sliderIdx--;
+      goSlider(sliderIdx);
+    } else {
+      showStep('s1');
+      setProgress(5);
+    }
+  } else if (from === 's3') {
+    goSlider(shuffledBrands.length - 1);
+  } else if (from === 's4a' || from === 's4b') {
+    showStep('s3');
+    setProgress(72);
+  }
 }
 
 function goFromPick() {
