@@ -28,9 +28,9 @@ body { background:#faf7f2; color:#2a2018; font-family:'DM Sans',sans-serif; min-
 .q-title { font-size:clamp(1.3rem,4vw,1.8rem); font-weight:300; color:#2a2018; text-align:center; margin-bottom:6px; line-height:1.3; }
 .q-hint { font-size:0.78rem; color:#b4906a; font-weight:300; text-align:center; margin-bottom:28px; }
 
-.demo-group { width:100%; margin-bottom:22px; }
-.demo-label { font-size:0.65rem; letter-spacing:3px; color:#9a8a70; text-transform:uppercase; margin-bottom:12px; }
-.demo-opts { display:flex; gap:10px; flex-wrap:wrap; }
+.demo-group { width:100%; margin-bottom:22px; text-align:center; }
+.demo-label { font-size:0.65rem; letter-spacing:3px; color:#9a8a70; text-transform:uppercase; margin-bottom:12px; text-align:center; }
+.demo-opts { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
 .demo-opt { padding:10px 18px; border:1px solid rgba(42,32,24,0.15); border-radius:100px; font-size:0.8rem; color:#7a6a50; cursor:pointer; transition:all 0.2s; background:#fff; }
 .demo-opt:hover { border-color:#b4906a; }
 .demo-opt.sel { border-color:#8a6a40; background:#fdf8f2; color:#2a2018; font-weight:500; }
@@ -39,7 +39,6 @@ body { background:#faf7f2; color:#2a2018; font-family:'DM Sans',sans-serif; min-
 .brand-logo-box { background:#fff; border-radius:16px; padding:28px 24px 20px; display:flex; flex-direction:column; align-items:center; margin-bottom:24px; box-shadow:0 4px 20px rgba(42,32,24,0.07); border:1px solid rgba(42,32,24,0.06); }
 .brand-logo-box .vname { font-family:'Josefin Sans',sans-serif; font-weight:200; font-size:2.2rem; color:#2a2820; letter-spacing:10px; line-height:1; }
 .brand-logo-box .vsub { font-family:'Josefin Sans',sans-serif; font-weight:300; font-size:0.7rem; letter-spacing:3px; color:#aaa; margin-top:8px; }
-.brand-counter { font-size:0.55rem; letter-spacing:4px; color:#ccc; text-align:center; margin-bottom:16px; text-transform:uppercase; }
 
 .criteria-list { width:100%; display:flex; flex-direction:column; gap:16px; }
 .criterion { background:#fff; border-radius:14px; padding:16px 18px; border:1px solid rgba(42,32,24,0.07); box-shadow:0 2px 10px rgba(42,32,24,0.04); }
@@ -53,6 +52,7 @@ input.crit-range.untouched::-webkit-slider-thumb { opacity:0; }
 .crit-num { font-size:0.6rem; color:#ccc; cursor:pointer; transition:all 0.15s; width:20px; text-align:center; padding:3px 0; border-radius:4px; }
 .crit-num:hover { color:#8a6a40; }
 .crit-num.active { color:#2a2018; font-weight:700; background:#fdf8f2; }
+.scale-label { font-size:0.65rem; color:#b4906a; text-align:center; margin-top:6px; min-height:16px; letter-spacing:0.5px; font-style:italic; }
 
 .pick-cards { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; width:100%; max-width:560px; }
 .pick-card { border:1.5px solid rgba(42,32,24,0.12); border-radius:14px; overflow:hidden; cursor:pointer; transition:all 0.2s; background:#fff; }
@@ -95,8 +95,8 @@ input.crit-range.untouched::-webkit-slider-thumb { opacity:0; }
 
 <div class="screen active" id="intro">
   <div class="intro-eyebrow">Marka Araştırması · 2026</div>
-  <h1>Sana bir marka<br>göstermek istiyoruz.</h1>
-  <p>Beş farklı isim, beş farklı his. Hangisi seni durdurur? 3 dakikan var.</p>
+  <h1>Yeni bir marka doğuyor.<br>Sen de söz sahibisin.</h1>
+  <p>Yeni bir atıştırmalık markası için isim algısı testi yapıyoruz. Beş isim. Bir marka. Hangisi kazanır? 3 dakikan var.</p>
   <p style="font-size:0.75rem;color:#c4b4a0;margin-top:-24px;margin-bottom:0;">🔒 Cevapların tamamen anonimdir.</p>
   <button class="start-btn" id="btn-start" style="margin-top:24px;">Başla →</button>
 </div>
@@ -105,7 +105,7 @@ input.crit-range.untouched::-webkit-slider-thumb { opacity:0; }
   <div class="q-wrap active" id="s1">
     <div class="q-step">Adım 1 / 4</div>
     <div class="q-title">Önce seni tanıyalım.</div>
-    <div class="q-hint">Üç hızlı soru</div>
+    <div class="q-hint">Dört hızlı soru</div>
     <div class="demo-group">
       <div class="demo-label">Yaş grubu</div>
       <div class="demo-opts">
@@ -127,11 +127,20 @@ input.crit-range.untouched::-webkit-slider-thumb { opacity:0; }
     <div class="demo-group">
       <div class="demo-label">Alışveriş alışkanlığı</div>
       <div class="demo-opts">
-        <div class="demo-opt" data-group="shop" data-val="Organik/sağlıklı">🌿 Organik / sağlıklı</div>
-        <div class="demo-opt" data-group="shop" data-val="Fiyat/kalite dengesi">⚖️ Fiyat / kalite dengesi</div>
-        <div class="demo-opt" data-group="shop" data-val="Marka bağlılığı">❤️ Marka bağlılığı</div>
+        <div class="demo-opt" data-group="shop" data-val="Sağlıklı içerik">🌿 Sağlıklı içerik</div>
+        <div class="demo-opt" data-group="shop" data-val="Uygun fiyat">⚖️ Uygun fiyat</div>
         <div class="demo-opt" data-group="shop" data-val="Yeni ürün denerim">✨ Yeni ürün denerim</div>
-        <div class="demo-opt" data-group="shop" data-val="Ambalaj/tasarım">🎨 Ambalaj / tasarım</div>
+        <div class="demo-opt" data-group="shop" data-val="Lezzet en önemlisi">😋 Lezzet en önemlisi</div>
+        <div class="demo-opt" data-group="shop" data-val="Marka bağlılığı">❤️ Marka bağlılığı</div>
+      </div>
+    </div>
+    <div class="demo-group">
+      <div class="demo-label">Haftada kaç kez atıştırmalık satın alırsın?</div>
+      <div class="demo-opts">
+        <div class="demo-opt" data-group="freq" data-val="Neredeyse hiç">Neredeyse hiç</div>
+        <div class="demo-opt" data-group="freq" data-val="1-2 kez">1–2 kez</div>
+        <div class="demo-opt" data-group="freq" data-val="3-4 kez">3–4 kez</div>
+        <div class="demo-opt" data-group="freq" data-val="5+ kez">5+ kez</div>
       </div>
     </div>
     <div class="q-nav">
@@ -142,8 +151,8 @@ input.crit-range.untouched::-webkit-slider-thumb { opacity:0; }
 
   <div class="q-wrap" id="s2">
     <div class="q-step" id="s2-step">Adım 2 / 4</div>
-    <div class="q-title">Bu marka seni ne kadar etkiliyor?</div>
-    <div class="q-hint">Her kriteri 1–7 arası puanla</div>
+    <div class="q-title">Bu marka sana ne hissettiriyor?</div>
+    <div class="q-hint">1 = Kesinlikle katılmıyorum · 7 = Kesinlikle katılıyorum</div>
     <div class="brand-rating-page" id="rating-page"></div>
     <div class="q-nav">
       <button class="back-btn" id="btn-s2-back">← Geri</button>
@@ -207,8 +216,8 @@ document.addEventListener('DOMContentLoaded', function() {
     { id:'güven',   emoji:'🤝', label:'Güvenilir bir marka gibi duruyor' }
   ];
 
-  var answers = { age:'', gender:'', shop:'', ratings:{}, pick:'', association:'', nameSuggestion:'' };
-  var demoFilled = { age:false, gender:false, shop:false };
+  var answers = { age:'', gender:'', shop:'', freq:'', ratings:{}, pick:'', association:'', nameSuggestion:'' };
+  var demoFilled = { age:false, gender:false, shop:false, freq:false };
   var shuffledBrands = [];
   var ratingIdx = 0;
 
@@ -252,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function() {
       el.classList.add('sel');
       answers[group] = val;
       demoFilled[group] = true;
-      var ok = demoFilled.age && demoFilled.gender && demoFilled.shop;
+      var ok = demoFilled.age && demoFilled.gender && demoFilled.shop && demoFilled.freq;
       document.getElementById('btn-s1-next').classList.toggle('on', ok);
     });
   });
@@ -276,8 +285,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var total = shuffledBrands.length;
     document.getElementById('s2-step').textContent = 'Adım 2 / 4 — Marka ' + (idx+1) + ' / ' + total;
 
-    var html = '<div class="brand-counter">' + (idx+1) + ' / ' + total + '</div>';
-    html += '<div class="brand-logo-box"><div class="vname">' + brand.id + '</div><div class="vsub">Smart Snacking</div></div>';
+    var html = '<div class="brand-logo-box"><div class="vname">' + brand.id + '</div><div class="vsub">Smart Snacking</div></div>';
     html += '<div class="criteria-list">';
     criteria.forEach(function(c) {
       html += '<div class="criterion">';
@@ -287,7 +295,9 @@ document.addEventListener('DOMContentLoaded', function() {
       for (var n = 1; n <= 7; n++) {
         html += '<span class="crit-num" data-crit="' + c.id + '" data-val="' + n + '">' + n + '</span>';
       }
-      html += '</div></div>';
+      html += '</div>';
+      html += '<div class="scale-label" id="scale-label-' + c.id + '"></div>';
+      html += '</div>';
     });
     html += '</div>';
     document.getElementById('rating-page').innerHTML = html;
@@ -328,10 +338,22 @@ document.addEventListener('DOMContentLoaded', function() {
     setProgress(10 + idx * 14);
   }
 
+  var scaleLabels = {
+    1: 'Kesinlikle katılmıyorum',
+    2: 'Katılmıyorum',
+    3: 'Pek katılmıyorum',
+    4: 'Kararsızım',
+    5: 'Biraz katılıyorum',
+    6: 'Katılıyorum',
+    7: 'Kesinlikle katılıyorum'
+  };
+
   function updateCritUI(critId, v) {
     document.querySelectorAll('.crit-num[data-crit="' + critId + '"]').forEach(function(el) {
       el.classList.toggle('active', parseInt(el.getAttribute('data-val')) === v);
     });
+    var labelEl = document.getElementById('scale-label-' + critId);
+    if (labelEl) labelEl.textContent = scaleLabels[v] || '';
   }
 
   function saveCrit(brandId, critId, val) {
@@ -430,6 +452,7 @@ document.addEventListener('DOMContentLoaded', function() {
       yas: answers.age,
       cinsiyet: answers.gender,
       alisveris: answers.shop,
+      atiştırmalık_sıklık: answers.freq,
       secilen_isim: answers.pick,
       cagrisim: answers.association,
       isim_oneri: answers.nameSuggestion,
