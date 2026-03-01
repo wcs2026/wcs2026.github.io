@@ -12,7 +12,7 @@ body { background:#faf7f2; color:#2a2018; font-family:'DM Sans',sans-serif; min-
 .screen { display:none; }
 .screen.active { display:flex; flex-direction:column; min-height:100vh; }
 
-.progress-bar { position:fixed; top:0; left:0; height:3px; background:#8a6a40; transition:width 0.5s ease; z-index:100; }
+.progress-bar { position:fixed; top:0; left:0; height:5px; background:#8a6a40; transition:width 0.5s ease; z-index:100; box-shadow:0 1px 4px rgba(138,106,64,0.3); }
 
 #intro { min-height:100vh; align-items:center; justify-content:center; text-align:center; padding:60px 24px; position:relative; overflow:hidden; }
 #intro::before { content:''; position:absolute; top:-100px; right:-100px; width:500px; height:500px; background:radial-gradient(circle, rgba(180,144,80,0.08) 0%, transparent 60%); pointer-events:none; }
@@ -149,6 +149,16 @@ input.crit-range.untouched::-webkit-slider-thumb { opacity:0; }
     </div>
   </div>
 
+  <div class="q-wrap" id="s-transition" style="justify-content:center;text-align:center;">
+    <div style="font-size:clamp(1.8rem,5vw,2.8rem);font-weight:300;color:#2a2018;line-height:1.3;margin-bottom:20px;">Şimdi isimlere<br>geçiyoruz.</div>
+    <div style="font-size:1.25rem;color:#9a8a70;font-weight:300;line-height:1.8;margin-bottom:12px;">Yeni bir atıştırmalık markası için 5 isim göstereceğiz. Her biri için 4 kısa soru.</div>
+    <div style="font-size:1.25rem;color:#9a8a70;font-weight:300;margin-bottom:48px;">İlk izlenimine göre puanla.</div>
+    <div class="q-nav" style="padding:0;">
+      <button class="back-btn" id="btn-st-back">← Geri</button>
+      <button class="next-btn on" id="btn-st-next" style="padding:16px 48px;font-size:1rem;letter-spacing:2px;">İsimleri Gör →</button>
+    </div>
+  </div>
+
   <div class="q-wrap" id="s2">
     <div class="q-step" id="s2-step">Adım 2 / 4</div>
     <div class="q-title">Bu marka sana ne hissettiriyor?</div>
@@ -274,8 +284,9 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('btn-s1-next').addEventListener('click', function() {
     if (!demoFilled.age || !demoFilled.gender || !demoFilled.shop) return;
     shuffledBrands = shuffle(brands);
-    renderRating(0);
     showScreen('survey');
+    showStep('s-transition');
+    setProgress(18);
   });
 
   // S2: RATING
@@ -368,12 +379,21 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('btn-s2-next').classList.toggle('on', allDone);
   }
 
+  document.getElementById('btn-st-back').addEventListener('click', function() {
+    showStep('s1');
+    setProgress(5);
+  });
+
+  document.getElementById('btn-st-next').addEventListener('click', function() {
+    renderRating(0);
+  });
+
   document.getElementById('btn-s2-back').addEventListener('click', function() {
     if (ratingIdx > 0) {
       renderRating(ratingIdx - 1);
     } else {
-      showStep('s1');
-      setProgress(5);
+      showStep('s-transition');
+      setProgress(18);
     }
   });
 
