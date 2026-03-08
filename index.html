@@ -577,11 +577,15 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
 
-    fetch('https://script.google.com/macros/s/AKfycbx76nb6554RZWeqzB8t2xhyyibYa31uB8E0xD_Vh6Kpuwt6-069zYwcHDOmNV8kBIWu/exec', {
+    // Google Apps Script — no-cors mode gerekiyor
+    var form = new FormData();
+    form.append('data', JSON.stringify(payload));
+
+    fetch('https://script.google.com/macros/s/AKfycbzlGj0PFzKvcJ-m2FhhdUHKMeKe8fkgRPkPfeE_RHYdKd9JD-keEJapicELiTT7CEt2/exec', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(payload)
-    }).catch(function(e) { console.log('Formspree error', e); });
+      mode: 'no-cors',
+      body: form
+    }).catch(function(e) { console.log('Script error', e); });
   }
 
 }); // DOMContentLoaded
