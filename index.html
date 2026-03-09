@@ -92,6 +92,16 @@ input.crit-range.untouched::-webkit-slider-thumb { opacity:0; }
 }
 </style>
 
+<!-- Google Analytics GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8VCKTX3ZSB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-8VCKTX3ZSB');
+</script>
+<!-- End Google Analytics -->
+
 <!-- Microsoft Clarity -->
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -304,6 +314,24 @@ src="https://www.facebook.com/tr?id=3289311761251549&ev=PageView&noscript=1"/></
   <div class="result-label">Teşekkürler</div>
   <div class="result-title">Cevapların kaydedildi.</div>
   <div class="result-sub">Katkın için teşekkürler — bu araştırma gerçek bir marka doğuracak.</div>
+
+  <div id="email-capture" style="margin-top:36px;max-width:400px;width:100%;position:relative;z-index:1;">
+    <div style="background:#fff;border-radius:16px;padding:24px;border:1px solid rgba(42,32,24,0.08);box-shadow:0 4px 20px rgba(42,32,24,0.07);text-align:left;">
+      <div style="font-size:0.6rem;letter-spacing:4px;color:#b4906a;text-transform:uppercase;margin-bottom:8px;">Opsiyonel</div>
+      <div style="font-size:1.05rem;font-weight:400;color:#2a2018;margin-bottom:6px;">Kazananı sana bildirelim mi?</div>
+      <div style="font-size:0.78rem;color:#9a8a70;font-weight:300;margin-bottom:18px;line-height:1.6;">Anket tamamlandığında hangi ismin kazandığını e-posta ile haber verelim.</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <input id="cap-name" type="text" placeholder="İsim" style="padding:12px 16px;border:1px solid rgba(42,32,24,0.15);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.88rem;color:#2a2018;outline:none;background:#faf7f2;width:100%;">
+        <input id="cap-surname" type="text" placeholder="Soyisim" style="padding:12px 16px;border:1px solid rgba(42,32,24,0.15);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.88rem;color:#2a2018;outline:none;background:#faf7f2;width:100%;">
+        <input id="cap-email" type="email" placeholder="E-posta" style="padding:12px 16px;border:1px solid rgba(42,32,24,0.15);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.88rem;color:#2a2018;outline:none;background:#faf7f2;width:100%;">
+      </div>
+      <div style="display:flex;gap:10px;margin-top:14px;">
+        <button onclick="submitCapture()" style="flex:1;padding:13px;background:#2a2018;color:#faf7f2;border:none;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:0.85rem;cursor:pointer;letter-spacing:1px;">Bildir →</button>
+        <button onclick="document.getElementById('email-capture').style.display='none'" style="padding:13px 20px;background:transparent;border:1px solid rgba(42,32,24,0.15);border-radius:100px;font-family:'DM Sans',sans-serif;font-size:0.8rem;color:#9a8a70;cursor:pointer;">Geç</button>
+      </div>
+      <div id="cap-done" style="display:none;text-align:center;padding:10px;font-size:0.85rem;color:#b4906a;margin-top:8px;">✓ Kaydedildi!</div>
+    </div>
+  </div>
 </div>
 
 <script>
