@@ -310,26 +310,57 @@ src="https://www.facebook.com/tr?id=3289311761251549&ev=PageView&noscript=1"/></
   </div>
 </div>
 
-<div class="screen" id="result">
-  <div class="result-label">Teşekkürler</div>
-  <div class="result-title">Cevapların kaydedildi.</div>
-  <div class="result-sub">Katkın için teşekkürler — bu araştırma gerçek bir marka doğuracak.</div>
+<!-- SCREEN: Email Capture -->
+<div class="screen" id="email-screen">
+  <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:400px;height:400px;background:radial-gradient(circle,rgba(180,144,80,0.08) 0%,transparent 60%);pointer-events:none;"></div>
+    <div style="font-size:0.6rem;letter-spacing:5px;color:#b4906a;text-transform:uppercase;margin-bottom:16px;position:relative;z-index:1;">Son bir adım</div>
+    <div style="font-size:clamp(1.6rem,4vw,2.4rem);font-weight:300;color:#2a2018;margin-bottom:8px;position:relative;z-index:1;text-align:center;line-height:1.2;">Kazananı sana<br>bildirelim mi?</div>
+    <div style="font-size:0.82rem;color:#9a8a70;font-weight:300;margin-bottom:32px;text-align:center;position:relative;z-index:1;">Anket tamamlandığında hangi ismin kazandığını<br>e-posta ile haber verelim.</div>
 
-  <div id="email-capture" style="margin-top:36px;max-width:400px;width:100%;position:relative;z-index:1;">
-    <div style="background:#fff;border-radius:16px;padding:24px;border:1px solid rgba(42,32,24,0.08);box-shadow:0 4px 20px rgba(42,32,24,0.07);text-align:left;">
-      <div style="font-size:0.6rem;letter-spacing:4px;color:#b4906a;text-transform:uppercase;margin-bottom:8px;">Opsiyonel</div>
-      <div style="font-size:1.05rem;font-weight:400;color:#2a2018;margin-bottom:6px;">Kazananı sana bildirelim mi?</div>
-      <div style="font-size:0.78rem;color:#9a8a70;font-weight:300;margin-bottom:18px;line-height:1.6;">Anket tamamlandığında hangi ismin kazandığını e-posta ile haber verelim.</div>
+    <!-- Countdown -->
+    <div style="font-size:0.7rem;letter-spacing:2px;color:#c4b4a0;margin-bottom:20px;position:relative;z-index:1;">
+      <span id="countdown-text">Otomatik geçiş: </span><span id="countdown-num" style="color:#b4906a;font-weight:500;">30</span><span id="countdown-text2"> saniye</span>
+    </div>
+
+    <div style="background:#fff;border-radius:16px;padding:24px;max-width:400px;width:100%;border:1px solid rgba(42,32,24,0.08);box-shadow:0 4px 20px rgba(42,32,24,0.07);text-align:left;position:relative;z-index:1;">
       <div style="display:flex;flex-direction:column;gap:10px;">
         <input id="cap-name" type="text" placeholder="İsim" style="padding:12px 16px;border:1px solid rgba(42,32,24,0.15);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.88rem;color:#2a2018;outline:none;background:#faf7f2;width:100%;">
         <input id="cap-surname" type="text" placeholder="Soyisim" style="padding:12px 16px;border:1px solid rgba(42,32,24,0.15);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.88rem;color:#2a2018;outline:none;background:#faf7f2;width:100%;">
         <input id="cap-email" type="email" placeholder="E-posta" style="padding:12px 16px;border:1px solid rgba(42,32,24,0.15);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.88rem;color:#2a2018;outline:none;background:#faf7f2;width:100%;">
       </div>
       <div style="display:flex;gap:10px;margin-top:14px;">
-        <button onclick="submitCapture()" style="flex:1;padding:13px;background:#2a2018;color:#faf7f2;border:none;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:0.85rem;cursor:pointer;letter-spacing:1px;">Bildir →</button>
-        <button onclick="document.getElementById('email-capture').style.display='none'" style="padding:13px 20px;background:transparent;border:1px solid rgba(42,32,24,0.15);border-radius:100px;font-family:'DM Sans',sans-serif;font-size:0.8rem;color:#9a8a70;cursor:pointer;">Geç</button>
+        <button id="cap-submit-btn" onclick="submitCapture()" style="flex:1;padding:13px;background:#2a2018;color:#faf7f2;border:none;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:0.85rem;cursor:pointer;letter-spacing:1px;">Bildir →</button>
+        <button onclick="skipCapture()" style="padding:13px 20px;background:transparent;border:1px solid rgba(42,32,24,0.15);border-radius:100px;font-family:'DM Sans',sans-serif;font-size:0.8rem;color:#9a8a70;cursor:pointer;">Geç</button>
       </div>
-      <div id="cap-done" style="display:none;text-align:center;padding:10px;font-size:0.85rem;color:#b4906a;margin-top:8px;">✓ Kaydedildi!</div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN: Share -->
+<div class="screen" id="share-screen">
+  <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px;position:relative;overflow:hidden;text-align:center;">
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:400px;height:400px;background:radial-gradient(circle,rgba(180,144,80,0.08) 0%,transparent 60%);pointer-events:none;"></div>
+    <div style="font-size:2rem;margin-bottom:16px;position:relative;z-index:1;">🎉</div>
+    <div style="font-size:0.6rem;letter-spacing:5px;color:#b4906a;text-transform:uppercase;margin-bottom:16px;position:relative;z-index:1;">Teşekkürler</div>
+    <div style="font-size:clamp(1.6rem,4vw,2.4rem);font-weight:300;color:#2a2018;margin-bottom:8px;position:relative;z-index:1;line-height:1.2;">Cevapların kaydedildi.</div>
+    <div style="font-size:0.85rem;color:#9a8a70;font-weight:300;margin-bottom:36px;position:relative;z-index:1;line-height:1.7;">Bu araştırma gerçek bir marka doğuracak.<br>Arkadaşlarının da fikrini öğrenmek ister misin?</div>
+
+    <div style="background:#fff;border-radius:16px;padding:24px;max-width:400px;width:100%;border:1px solid rgba(42,32,24,0.08);box-shadow:0 4px 20px rgba(42,32,24,0.07);position:relative;z-index:1;">
+      <div style="font-size:0.6rem;letter-spacing:4px;color:#b4906a;text-transform:uppercase;margin-bottom:16px;">Anketi paylaş</div>
+      
+      <!-- Share buttons -->
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <button onclick="shareWhatsApp()" style="display:flex;align-items:center;gap:12px;padding:14px 18px;background:#25D366;color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:0.85rem;cursor:pointer;font-weight:500;">
+          <span style="font-size:1.2rem;">💬</span> WhatsApp'ta Paylaş
+        </button>
+        <button onclick="shareTwitter()" style="display:flex;align-items:center;gap:12px;padding:14px 18px;background:#1DA1F2;color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:0.85rem;cursor:pointer;font-weight:500;">
+          <span style="font-size:1.2rem;">🐦</span> Twitter'da Paylaş
+        </button>
+        <button onclick="copyLink()" id="copy-btn" style="display:flex;align-items:center;gap:12px;padding:14px 18px;background:#faf7f2;color:#2a2018;border:1px solid rgba(42,32,24,0.15);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:0.85rem;cursor:pointer;font-weight:400;">
+          <span style="font-size:1.2rem;">🔗</span> Linki Kopyala
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -605,15 +636,19 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('btn-s4b-send').addEventListener('click', submitSurvey);
   document.getElementById('btn-s4b-skip').addEventListener('click', submitSurvey);
 
-  // SUBMIT
+  // SUBMIT — veriyi bellekte tut, email ekranını göster
+  var pendingPayload = null;
+  var countdownTimer = null;
+  var dataSent = false;
+
   function submitSurvey() {
     answers.association = document.getElementById('association').value || '';
     answers.nameSuggestion = document.getElementById('name-suggestion').value || '';
     setProgress(100);
-    showScreen('result');
     if(window.fbq) fbq('track', 'Lead');
 
-    var payload = {
+    // Payload hazırla ama henüz gönderme
+    pendingPayload = {
       yas: answers.age,
       cinsiyet: answers.gender,
       alisveris: answers.shop,
@@ -623,36 +658,90 @@ document.addEventListener('DOMContentLoaded', function() {
       isim_oneri: answers.nameSuggestion,
       marka_sirasi: shuffledBrands.map(function(b) { return b.id; }).join(' → ')
     };
-
     Object.keys(answers.ratings).forEach(function(brand) {
       Object.keys(answers.ratings[brand]).forEach(function(crit) {
-        payload[brand + '_' + crit] = answers.ratings[brand][crit];
+        pendingPayload[brand + '_' + crit] = answers.ratings[brand][crit];
       });
     });
 
-    // Google Apps Script — no-cors mode gerekiyor
-    var form = new FormData();
-    form.append('data', JSON.stringify(payload));
+    // Email ekranını göster
+    showScreen('email-screen');
+    startCountdown();
+  }
 
+  function startCountdown() {
+    var secs = 30;
+    document.getElementById('countdown-num').textContent = secs;
+    countdownTimer = setInterval(function() {
+      secs--;
+      document.getElementById('countdown-num').textContent = secs;
+      if (secs <= 0) {
+        clearInterval(countdownTimer);
+        skipCapture();
+      }
+    }, 1000);
+  }
+
+  function sendSurveyData(emailData) {
+    if (dataSent) return;
+    dataSent = true;
+    clearInterval(countdownTimer);
+
+    // Email bilgisini payload'a ekle
+    if (emailData) {
+      pendingPayload.cap_isim = emailData.isim;
+      pendingPayload.cap_soyisim = emailData.soyisim;
+      pendingPayload.cap_eposta = emailData.eposta;
+    } else {
+      pendingPayload.cap_eposta = 'verilmedi';
+    }
+
+    var form = new FormData();
+    form.append('data', JSON.stringify(pendingPayload));
     fetch('https://script.google.com/macros/s/AKfycbyh0yNriMC3lkmLhZb49k5NXWpc5dbTsaCxxu-0_91qwVV_cMT-xxpdcoD3g3Wm_WuX/exec', {
-      method: 'POST',
-      mode: 'no-cors',
-      body: form
+      method: 'POST', mode: 'no-cors', body: form
     }).catch(function(e) { console.log('Script error', e); });
+
+    // Paylaşım ekranına geç
+    showScreen('share-screen');
+  }
+
+  function submitCapture() {
+    var name = document.getElementById('cap-name').value.trim();
+    var surname = document.getElementById('cap-surname').value.trim();
+    var email = document.getElementById('cap-email').value.trim();
+    if (!name || !email) { alert('İsim ve e-posta zorunlu.'); return; }
+    sendSurveyData({ isim: name, soyisim: surname, eposta: email });
+  }
+
+  function skipCapture() {
+    sendSurveyData(null);
+  }
+
+  // Share functions
+  var SHARE_URL = 'https://anket.wavecreativestudio.co';
+  var SHARE_TEXT = 'Yeni bir atıştırmalık markası isim seçiyor — sen de söz sahibi ol! 🏷️';
+
+  function shareWhatsApp() {
+    window.open('https://wa.me/?text=' + encodeURIComponent(SHARE_TEXT + ' ' + SHARE_URL), '_blank');
+  }
+  function shareTwitter() {
+    window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(SHARE_TEXT) + '&url=' + encodeURIComponent(SHARE_URL), '_blank');
+  }
+  function copyLink() {
+    navigator.clipboard.writeText(SHARE_URL).then(function() {
+      var btn = document.getElementById('copy-btn');
+      btn.innerHTML = '<span style="font-size:1.2rem;">\u2713</span> Kopyaland\u0131!';
+      btn.style.background = '#f0faf0';
+      btn.style.borderColor = '#b4906a';
+      setTimeout(function() {
+        btn.innerHTML = '<span style="font-size:1.2rem;">\uD83D\uDD17</span> Linki Kopyala';
+        btn.style.background = '#faf7f2';
+      }, 2000);
+    });
   }
 
 }); // DOMContentLoaded
-  function submitCapture() {
-  var name = document.getElementById('cap-name').value.trim();
-  var surname = document.getElementById('cap-surname').value.trim();
-  var email = document.getElementById('cap-email').value.trim();
-  if (!name || !email) { alert('İsim ve e-posta zorunlu.'); return; }
-  var form = new FormData();
-  form.append('data', JSON.stringify({ tip:'email_capture', isim:name, soyisim:surname, eposta:email }));
-  fetch('https://script.google.com/macros/s/AKfycbyh0yNriMC3lkmLhZb49k5NXWpc5dbTsaCxxu-0_91qwVV_cMT-xxpdcoD3g3Wm_WuX/exec', { method:'POST', mode:'no-cors', body:form });
-  document.getElementById('cap-done').style.display = 'block';
-  document.getElementById('email-capture').querySelectorAll('input,button').forEach(function(el){ el.disabled=true; });
-}
 </script>
 </body>
 </html>
