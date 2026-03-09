@@ -642,6 +642,17 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
 }); // DOMContentLoaded
+  function submitCapture() {
+  var name = document.getElementById('cap-name').value.trim();
+  var surname = document.getElementById('cap-surname').value.trim();
+  var email = document.getElementById('cap-email').value.trim();
+  if (!name || !email) { alert('İsim ve e-posta zorunlu.'); return; }
+  var form = new FormData();
+  form.append('data', JSON.stringify({ tip:'email_capture', isim:name, soyisim:surname, eposta:email }));
+  fetch('https://script.google.com/macros/s/AKfycbyh0yNriMC3lkmLhZb49k5NXWpc5dbTsaCxxu-0_91qwVV_cMT-xxpdcoD3g3Wm_WuX/exec', { method:'POST', mode:'no-cors', body:form });
+  document.getElementById('cap-done').style.display = 'block';
+  document.getElementById('email-capture').querySelectorAll('input,button').forEach(function(el){ el.disabled=true; });
+}
 </script>
 </body>
 </html>
