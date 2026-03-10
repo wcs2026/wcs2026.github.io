@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marka Anketi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,200;0,300;0,400;0,500;1,300&family=Josefin+Sans:wght@100;200;300;400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,200;0,300;0,400;0,500;1,300&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet"></noscript>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#faf7f2; color:#2a2018; font-family:'DM Sans',sans-serif; min-height:100vh; }
+.screen { display:none; }
+.screen.active { display:flex; flex-direction:column; min-height:100vh; }
+.progress-bar-wrap { position:fixed; top:0; left:0; right:0; z-index:100; }
+.progress-bar-track { width:100%; height:28px; background:rgba(42,32,24,0.07); overflow:hidden; }
+.progress-bar { height:100%; background:linear-gradient(90deg,#8a6a40,#b4906a); border-radius:0 6px 6px 0; transition:width 0.6s cubic-bezier(0.4,0,0.2,1); display:flex; align-items:center; justify-content:flex-end; min-width:36px; }
+.progress-pct { font-size:0.65rem; color:#fff; letter-spacing:1.5px; font-weight:500; padding-right:10px; white-space:nowrap; }
+#intro { min-height:100vh; align-items:center; justify-content:center; text-align:center; padding:60px 24px; position:relative; overflow:hidden; background:#faf7f2; }
+#intro::before { content:''; position:absolute; top:-100px; right:-100px; width:500px; height:500px; background:radial-gradient(circle,rgba(180,144,80,0.08) 0%,transparent 60%); pointer-events:none; }
+.intro-eyebrow { font-size:0.6rem; letter-spacing:5px; color:#b4906a; text-transform:uppercase; margin-bottom:20px; position:relative; z-index:1; }
+.start-btn { display:block; width:100%; max-width:400px; padding:20px 48px; background:#2a2018; color:#faf7f2; border:none; border-radius:16px; font-family:'DM Sans',sans-serif; font-size:1.1rem; font-weight:500; cursor:pointer; transition:all 0.25s; position:relative; z-index:1; letter-spacing:1px; box-shadow:0 8px 24px rgba(42,32,24,0.18); margin:0 auto; }
+.start-btn:hover { background:#3d3020; transform:translateY(-2px); box-shadow:0 12px 32px rgba(42,32,24,0.25); }
+.start-btn:active { transform:scale(0.97); }
+.q-wrap { flex:1; display:none; flex-direction:column; align-items:center; padding:60px 20px 40px; max-width:600px; margin:0 auto; width:100%; }
+.q-wrap.active { display:flex; }
+.q-step { font-size:0.55rem; letter-spacing:4px; color:#b4906a; text-transform:uppercase; margin-bottom:12px; }
+.q-title { font-size:clamp(1.3rem,4vw,1.8rem); font-weight:300; color:#2a2018; text-align:center; margin-bottom:6px; line-height:1.3; }
+.q-hint { font-size:0.78rem; color:#b4906a; font-weight:300; text-align:center; margin-bottom:28px; }
+.demo-group { width:100%; margin-bottom:22px; text-align:center; }
+.demo-label { font-size:0.65rem; letter-spacing:3px; color:#9a8a70; text-transform:uppercase; margin-bottom:12px; text-align:center; }
+.demo-opts { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+.demo-opt { padding:10px 18px; border:1px solid rgba(42,32,24,0.15); border-radius:100px; font-size:0.8rem; color:#7a6a50; cursor:pointer; transition:all 0.15s; background:#fff; user-select:none; }
+.demo-opt:hover { border-color:#b4906a; }
+.demo-opt:active { transform:scale(0.93); }
+.demo-opt.sel { border-color:#8a6a40; background:#fdf8f2; color:#2a2018; font-weight:500; }
+.brand-logo-box { background:#fff; border-radius:16px; padding:28px 24px 20px; display:flex; flex-direction:column; align-items:center; margin-bottom:24px; box-shadow:0 4px 20px rgba(42,32,24,0.07); border:1px solid rgba(42,32,24,0.06); }
+.brand-logo-box .vname { font-family:'Josefin Sans',sans-serif; font-weight:200; font-size:2.2rem; color:#2a2820; letter-spacing:10px; line-height:1; }
+.brand-logo-box .vsub { font-family:'Josefin Sans',sans-serif; font-weight:300; font-size:0.7rem; letter-spacing:3px; color:#aaa; margin-top:8px; }
+.brand-rating-page { width:100%; max-width:500px; }
+.criteria-list { width:100%; display:flex; flex-direction:column; gap:16px; }
+.criterion { background:#fff; border-radius:14px; padding:16px 18px; border:1px solid rgba(42,32,24,0.07); box-shadow:0 2px 10px rgba(42,32,24,0.04); }
+.crit-label { font-size:0.82rem; color:#2a2018; font-weight:400; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+.crit-emoji { font-size:1.1rem; }
+input.crit-range { width:100%; -webkit-appearance:none; appearance:none; height:3px; background:rgba(42,32,24,0.1); border-radius:2px; outline:none; cursor:pointer; margin-bottom:8px; display:block; }
+input.crit-range::-webkit-slider-thumb { -webkit-appearance:none; width:22px; height:22px; border-radius:50%; background:#2a2018; cursor:pointer; box-shadow:0 2px 8px rgba(42,32,24,0.2); transition:transform 0.15s; }
+input.crit-range::-webkit-slider-thumb:hover { transform:scale(1.1); }
+input.crit-range.untouched::-webkit-slider-thumb { opacity:0; }
+.crit-nums { display:flex; justify-content:space-between; }
+.crit-num { font-size:0.6rem; color:#ccc; cursor:pointer; transition:all 0.15s; width:20px; text-align:center; padding:3px 0; border-radius:4px; }
+.crit-num:hover { color:#8a6a40; }
+.crit-num.active { color:#2a2018; font-weight:700; background:#fdf8f2; }
+.scale-label { font-size:0.65rem; color:#b4906a; text-align:center; margin-top:6px; min-height:16px; letter-spacing:0.5px; font-style:italic; }
+.pick-cards { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; width:100%; max-width:560px; }
+.pick-card { border:1.5px solid rgba(42,32,24,0.12); border-radius:14px; overflow:hidden; cursor:pointer; transition:all 0.2s; background:#fff; }
+.pick-card:hover { border-color:#b4906a; transform:translateY(-2px); }
+.pick-card.sel { border-color:#8a6a40; box-shadow:0 4px 20px rgba(42,32,24,0.12); }
+.pc-visual { aspect-ratio:1/1; width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:12px; background:#fff; }
+.pc-visual .vname { font-family:'Josefin Sans',sans-serif; font-weight:200; font-size:1.3rem; color:#2a2820; letter-spacing:6px; text-align:center; }
+.pc-visual .vsub { font-family:'Josefin Sans',sans-serif; font-weight:300; font-size:0.5rem; letter-spacing:2px; color:#aaa; margin-top:6px; text-align:center; }
+.pc-none-visual { aspect-ratio:1/1; width:100%; display:flex; align-items:center; justify-content:center; background:#f8f8f8; }
+.pc-none-text { font-size:0.78rem; color:#bbb; text-align:center; font-weight:300; line-height:1.5; }
+.open-input { width:100%; background:#fff; border:1px solid rgba(42,32,24,0.15); border-radius:16px; padding:20px; color:#2a2018; font-family:'DM Sans',sans-serif; font-size:0.9rem; font-weight:300; line-height:1.7; resize:none; outline:none; transition:border-color 0.2s; min-height:140px; box-shadow:0 2px 12px rgba(42,32,24,0.06); }
+.open-input:focus { border-color:#b4906a; }
+.open-input::placeholder { color:#c4b4a0; }
+.q-nav { padding:24px 0 40px; display:flex; justify-content:center; align-items:center; gap:12px; flex-wrap:wrap; }
+.next-btn { padding:14px 40px; background:#2a2018; color:#faf7f2; border:none; border-radius:100px; font-family:'DM Sans',sans-serif; font-size:0.85rem; cursor:pointer; transition:all 0.3s; opacity:0.35; pointer-events:none; }
+.next-btn.on { opacity:1; pointer-events:all; }
+.next-btn.on:hover { background:#3d3020; transform:translateY(-2px); }
+.back-btn { padding:14px 20px; background:transparent; border:none; color:#c4b4a0; font-family:'DM Sans',sans-serif; font-size:0.8rem; cursor:pointer; transition:all 0.2s; letter-spacing:1px; }
+.back-btn:hover { color:#8a6a40; }
+.skip-btn { padding:14px 24px; background:transparent; border:1px solid rgba(42,32,24,0.15); color:#9a8a70; border-radius:100px; font-family:'DM Sans',sans-serif; font-size:0.8rem; cursor:pointer; }
+@media (max-width:500px) { .pick-cards { grid-template-columns:1fr 1fr; } .demo-opts { gap:8px; } }
+</style>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8VCKTX3ZSB"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8VCKTX3ZSB');</script>
+<!-- Clarity -->
+<script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","vt4mo72jfq");</script>
+<!-- Meta Pixel -->
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','3289311761251549');fbq('track','PageView');</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=3289311761251549&ev=PageView&noscript=1"/></noscript>
+</head>
+<body>
+
+<div class="progress-bar-wrap"><div class="progress-bar-track"><div class="progress-bar" id="progress" style="width:0%"><span class="progress-pct" id="progress-pct"></span></div></div></div>
+
+<!-- INTRO -->
+<div class="screen active" id="intro">
+  <div class="intro-eyebrow">Marka Araştırması · 2026</div>
+  <h1 style="font-size:clamp(1.8rem,5vw,3rem);font-weight:300;line-height:1.25;margin-bottom:12px;position:relative;z-index:1;color:#2a2018;">Yeni bir atıştırmalık<br>markası doğuyor.</h1>
+  <p style="font-size:1rem;color:#5a4a38;font-weight:400;margin-bottom:4px;position:relative;z-index:1;">İsmini seçmemize yardımcı olur musun?</p>
+  <p style="font-size:0.85rem;color:#9a8a70;font-weight:300;margin-bottom:36px;position:relative;z-index:1;">Sen de söz sahibisin — cevapların gerçek bir markayı şekillendirecek.</p>
+
+  <button class="start-btn" id="btn-start">Ankete Başla →</button>
+
+  <div style="margin-top:24px;display:flex;flex-direction:column;gap:8px;max-width:320px;margin-left:auto;margin-right:auto;position:relative;z-index:1;">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center;">
+      <span style="font-size:0.8rem;">🔒</span>
+      <span style="font-size:0.8rem;color:#9a8a70;font-weight:300;">Cevapların tamamen anonimdir</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center;">
+      <span style="font-size:0.8rem;">👥</span>
+      <span style="font-size:0.8rem;color:#9a8a70;font-weight:300;">1000+ kişi ankete katıldı</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center;">
+      <span style="font-size:0.8rem;">⏱</span>
+      <span style="font-size:0.8rem;color:#9a8a70;font-weight:300;">Ortalama süre: 2 dk 40 sn</span>
+    </div>
+  </div>
+</div>
+
+<!-- SURVEY -->
+<div class="screen" id="survey">
+  <div class="q-wrap active" id="s1">
+    <div class="q-step">Adım 1 / 4</div>
+    <div class="q-title">Önce seni tanıyalım.</div>
+    <div class="q-hint">Dört hızlı soru</div>
+    <div class="demo-group">
+      <div class="demo-label">Yaş grubu</div>
+      <div class="demo-opts">
+        <div class="demo-opt" data-group="age" data-val="15-24">15–24</div>
+        <div class="demo-opt" data-group="age" data-val="25-34">25–34</div>
+        <div class="demo-opt" data-group="age" data-val="35-44">35–44</div>
+        <div class="demo-opt" data-group="age" data-val="45-55">45–55</div>
+        <div class="demo-opt" data-group="age" data-val="55+">55+</div>
+      </div>
+    </div>
+    <div class="demo-group">
+      <div class="demo-label">Cinsiyet</div>
+      <div class="demo-opts">
+        <div class="demo-opt" data-group="gender" data-val="Kadın">Kadın</div>
+        <div class="demo-opt" data-group="gender" data-val="Erkek">Erkek</div>
+        <div class="demo-opt" data-group="gender" data-val="Belirtmek istemiyorum">Belirtmek istemiyorum</div>
+      </div>
+    </div>
+    <div class="demo-group">
+      <div class="demo-label">Alışveriş alışkanlığı</div>
+      <div style="font-size:0.7rem;color:#c4b4a0;margin-bottom:10px;text-align:center;">Seni en çok tanımlayan seçeneği işaretle</div>
+      <div class="demo-opts">
+        <div class="demo-opt" data-group="shop" data-val="Sağlıklı içerik">🌿 Sağlıklı içerik</div>
+        <div class="demo-opt" data-group="shop" data-val="Uygun fiyat">⚖️ Uygun fiyat</div>
+        <div class="demo-opt" data-group="shop" data-val="Yeni ürün denerim">✨ Yeni ürün denerim</div>
+        <div class="demo-opt" data-group="shop" data-val="Lezzet en önemlisi">😋 Lezzet en önemlisi</div>
+        <div class="demo-opt" data-group="shop" data-val="Marka bağlılığı">❤️ Marka bağlılığı</div>
+      </div>
+    </div>
+    <div class="demo-group">
+      <div class="demo-label">Haftada kaç kez atıştırmalık satın alırsın?</div>
+      <div class="demo-opts">
+        <div class="demo-opt" data-group="freq" data-val="Neredeyse hiç">Neredeyse hiç</div>
+        <div class="demo-opt" data-group="freq" data-val="1-2 kez">1–2 kez</div>
+        <div class="demo-opt" data-group="freq" data-val="3-4 kez">3–4 kez</div>
+        <div class="demo-opt" data-group="freq" data-val="5+ kez">5+ kez</div>
+      </div>
+    </div>
+    <div class="q-nav">
+      <button class="back-btn" id="btn-s1-back">← Geri</button>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <button class="next-btn" id="btn-s1-next">Devam →</button>
+        <span style="font-size:0.65rem;color:#c4b4a0;">Devam etmek için tüm soruları cevapla</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-wrap" id="s-transition" style="justify-content:center;text-align:center;">
+    <div style="font-size:0.6rem;letter-spacing:4px;color:#b4906a;text-transform:uppercase;margin-bottom:16px;">Harika, teşekkürler</div>
+    <div style="font-size:clamp(1.8rem,5vw,2.6rem);font-weight:300;color:#2a2018;line-height:1.25;margin-bottom:32px;">Şimdi isimlere<br>geçiyoruz.</div>
+    <div style="background:#fff;border-radius:16px;padding:24px;max-width:360px;width:100%;border:1px solid rgba(42,32,24,0.07);box-shadow:0 4px 20px rgba(42,32,24,0.06);margin-bottom:40px;display:flex;flex-direction:column;gap:20px;">
+      <div style="display:flex;align-items:center;gap:16px;text-align:left;"><div style="font-size:1.4rem;width:36px;text-align:center;flex-shrink:0;">🏷️</div><div><div style="font-size:0.85rem;font-weight:500;color:#2a2018;margin-bottom:2px;">5 marka ismi</div><div style="font-size:0.75rem;color:#9a8a70;font-weight:300;">Her ismi sana birer birer göstereceğiz</div></div></div>
+      <div style="height:1px;background:rgba(42,32,24,0.06);"></div>
+      <div style="display:flex;align-items:center;gap:16px;text-align:left;"><div style="font-size:1.4rem;width:36px;text-align:center;flex-shrink:0;">⭐</div><div><div style="font-size:0.85rem;font-weight:500;color:#2a2018;margin-bottom:2px;">Her isim için 4 soru</div><div style="font-size:0.75rem;color:#9a8a70;font-weight:300;">İlk izlenimine göre puanlamanı isteyeceğiz</div></div></div>
+      <div style="height:1px;background:rgba(42,32,24,0.06);"></div>
+      <div style="display:flex;align-items:center;gap:16px;text-align:left;"><div style="font-size:1.4rem;width:36px;text-align:center;flex-shrink:0;">💡</div><div><div style="font-size:0.85rem;font-weight:500;color:#2a2018;margin-bottom:2px;">İlk his en doğru his</div><div style="font-size:0.75rem;color:#9a8a70;font-weight:300;">Fazla düşünme, içgüdüne güven</div></div></div>
+    </div>
+    <div class="q-nav" style="padding:0;">
+      <button class="back-btn" id="btn-st-back">← Geri</button>
+      <button class="next-btn on" id="btn-st-next" style="padding:16px 52px;font-size:1rem;letter-spacing:2px;">İsimleri Gör →</button>
+    </div>
+  </div>
+
+  <div class="q-wrap" id="s-brand-intro" style="justify-content:center;text-align:center;">
+    <div class="q-step" id="intro-step">Marka 1 / 5</div>
+    <div style="font-size:0.85rem;color:#b4906a;font-weight:300;margin-bottom:32px;letter-spacing:1px;">Markaya kısa bir göz at. Sonraki adımda birkaç soruda puanlayacaksın.</div>
+    <div class="brand-logo-box" style="max-width:340px;width:100%;padding:48px 32px;margin-bottom:40px;">
+      <div class="vname" id="intro-brand-name"></div>
+      <div class="vsub">Smart Snacking</div>
+    </div>
+    <div class="q-nav" style="padding:0;">
+      <button class="back-btn" id="btn-bi-back">← Geri</button>
+      <button class="next-btn on" id="btn-bi-next" style="padding:16px 48px;font-size:1rem;">Değerlendir →</button>
+    </div>
+  </div>
+
+  <div class="q-wrap" id="s2">
+    <div class="q-step" id="s2-step">Adım 2 / 4</div>
+    <div id="s2-brand-above" style="background:#fff;border-radius:16px;padding:28px 32px;box-shadow:0 4px 20px rgba(42,32,24,0.07);border:1px solid rgba(42,32,24,0.06);margin-bottom:24px;width:100%;max-width:500px;text-align:center;"><span style="font-family:'Josefin Sans',sans-serif;font-weight:200;font-size:2.2rem;color:#2a2820;letter-spacing:10px;"></span></div>
+    <div class="q-title" style="margin-bottom:4px;">Bu marka sana ne hissettiriyor?</div>
+    <div class="q-hint">Her kriteri 1–7 arası puanla</div>
+    <div class="brand-rating-page" id="rating-page"></div>
+    <div class="q-nav">
+      <button class="back-btn" id="btn-s2-back">← Geri</button>
+      <button class="next-btn" id="btn-s2-next">Devam →</button>
+    </div>
+  </div>
+
+  <div class="q-wrap" id="s3">
+    <div class="q-step">Adım 3 / 4</div>
+    <div class="q-title">Bir isim seçecek olsan,<br>hangisini seçerdin?</div>
+    <div class="q-hint">Raf önünde duruyorsun — ilk içgüdün ne?</div>
+    <div class="pick-cards" id="pick-cards"></div>
+    <div class="q-nav">
+      <button class="back-btn" id="btn-s3-back">← Geri</button>
+      <button class="next-btn" id="btn-s3-next">Devam →</button>
+    </div>
+  </div>
+
+  <div class="q-wrap" id="s4a">
+    <div class="q-step">Adım 4 / 4</div>
+    <div class="q-title">Peki sen olsan ne koyardın?</div>
+    <div class="q-hint">Aklına gelen her şeyi yazabilirsin</div>
+    <textarea class="open-input" id="name-suggestion" placeholder="İsim fikrin, beklentin, ne hissettirdi..."></textarea>
+    <div class="q-nav">
+      <button class="back-btn" id="btn-s4a-back">← Geri</button>
+      <button class="next-btn on" id="btn-s4a-send">Gönder →</button>
+      <button class="skip-btn" id="btn-s4a-skip">Geç</button>
+    </div>
+  </div>
+
+  <div class="q-wrap" id="s4b">
+    <div class="q-step">Adım 4 / 4</div>
+    <div class="q-title" id="s4b-title">Bu isim sende ne çağrıştırıyor?</div>
+    <div class="q-hint">Aklına gelen ilk kelimeyi yaz.</div>
+    <textarea class="open-input" id="association" placeholder="Aklına ilk gelen şeyi yaz..."></textarea>
+    <div class="q-nav">
+      <button class="back-btn" id="btn-s4b-back">← Geri</button>
+      <button class="next-btn on" id="btn-s4b-send">Gönder →</button>
+      <button class="skip-btn" id="btn-s4b-skip">Geç</button>
+    </div>
+  </div>
+</div>
+
+<!-- EMAIL CAPTURE -->
+<div class="screen" id="email-screen">
+  <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:400px;height:400px;background:radial-gradient(circle,rgba(180,144,80,0.08) 0%,transparent 60%);pointer-events:none;"></div>
+    <div style="font-size:0.6rem;letter-spacing:5px;color:#b4906a;text-transform:uppercase;margin-bottom:16px;position:relative;z-index:1;">Son bir adım</div>
+    <div style="font-size:clamp(1.6rem,4vw,2.4rem);font-weight:300;color:#2a2018;margin-bottom:8px;position:relative;z-index:1;text-align:center;line-height:1.2;">Kazananı sana<br>bildirelim mi?</div>
+    <div style="font-size:0.82rem;color:#9a8a70;font-weight:300;margin-bottom:32px;text-align:center;position:relative;z-index:1;line-height:1.6;">Anket tamamlandığında hangi ismin kazandığını<br>e-posta ile haber verelim.</div>
+    <div style="background:#fff;border-radius:16px;padding:24px;max-width:400px;width:100%;border:1px solid rgba(42,32,24,0.08);box-shadow:0 4px 20px rgba(42,32,24,0.07);text-align:left;position:relative;z-index:1;">
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <input id="cap-name" type="text" placeholder="İsim" style="padding:12px 16px;border:1px solid rgba(42,32,24,0.15);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.88rem;color:#2a2018;outline:none;background:#faf7f2;width:100%;">
+        <input id="cap-surname" type="text" placeholder="Soyisim" style="padding:12px 16px;border:1px solid rgba(42,32,24,0.15);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.88rem;color:#2a2018;outline:none;background:#faf7f2;width:100%;">
+        <input id="cap-email" type="email" placeholder="E-posta" style="padding:12px 16px;border:1px solid rgba(42,32,24,0.15);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:0.88rem;color:#2a2018;outline:none;background:#faf7f2;width:100%;">
+      </div>
+      <div style="display:flex;gap:10px;margin-top:14px;">
+        <button id="cap-submit-btn" style="flex:1;padding:13px;background:#2a2018;color:#faf7f2;border:none;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:0.85rem;cursor:pointer;letter-spacing:1px;">Bildir →</button>
+        <button id="cap-skip-btn" style="padding:13px 20px;background:transparent;border:1px solid rgba(42,32,24,0.15);border-radius:100px;font-family:'DM Sans',sans-serif;font-size:0.8rem;color:#9a8a70;cursor:pointer;">Geç</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SHARE -->
+<div class="screen" id="share-screen">
+  <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px;position:relative;overflow:hidden;text-align:center;">
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:400px;height:400px;background:radial-gradient(circle,rgba(180,144,80,0.08) 0%,transparent 60%);pointer-events:none;"></div>
+    <div style="font-size:2rem;margin-bottom:16px;position:relative;z-index:1;">🎉</div>
+    <div style="font-size:0.6rem;letter-spacing:5px;color:#b4906a;text-transform:uppercase;margin-bottom:16px;position:relative;z-index:1;">Teşekkürler</div>
+    <div style="font-size:clamp(1.6rem,4vw,2.4rem);font-weight:300;color:#2a2018;margin-bottom:8px;position:relative;z-index:1;line-height:1.2;">Cevapların kaydedildi.</div>
+    <div style="font-size:0.85rem;color:#9a8a70;font-weight:300;margin-bottom:36px;position:relative;z-index:1;line-height:1.7;">Arkadaşlarının da fikrini öğrenmek ister misin?</div>
+    <div style="background:#fff;border-radius:16px;padding:24px;max-width:400px;width:100%;border:1px solid rgba(42,32,24,0.08);box-shadow:0 4px 20px rgba(42,32,24,0.07);position:relative;z-index:1;">
+      <div style="font-size:0.6rem;letter-spacing:4px;color:#b4906a;text-transform:uppercase;margin-bottom:16px;">Anketi paylaş</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <button id="btn-share-whatsapp" style="display:flex;align-items:center;gap:12px;padding:14px 18px;background:#25D366;color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:0.85rem;cursor:pointer;font-weight:500;"><span style="font-size:1.2rem;">💬</span> WhatsApp'ta Paylaş</button>
+        <button id="btn-share-instagram" style="display:flex;align-items:center;gap:12px;padding:14px 18px;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:0.85rem;cursor:pointer;font-weight:500;"><span style="font-size:1.2rem;">📸</span> Instagram için Kopyala</button>
+        <button id="btn-copy-link" style="display:flex;align-items:center;gap:12px;padding:14px 18px;background:#faf7f2;color:#2a2018;border:1px solid rgba(42,32,24,0.15);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:0.85rem;cursor:pointer;"><span style="font-size:1.2rem;">🔗</span> Linki Kopyala</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw8zNzBYiax6GWbOzSMTFRnNQWby9XRRJNDxxvcbEEwhVZ2qB86IOO9QjjcImz0fdUe/exec';
+  var SHARE_URL = 'https://anket.wavecreativestudio.co';
+  var SHARE_TEXT = 'Yeni bir atıştırmalık markası isim seçiyor — sen de söz sahibi ol!';
+
+  var brands = [{id:'NÖTR'},{id:'ZENO'},{id:'KIVO'},{id:'MOYA'},{id:'NUKA'}];
+  var criteria = [
+    {id:'alırım', emoji:'🛒', label:'Rafta görürsem satın alırım'},
+    {id:'premium', emoji:'✨', label:'Şık ve premium hissettiriyor'},
+    {id:'merak', emoji:'🔍', label:'Merak uyandırıyor, daha fazlasını görmek istiyorum'},
+    {id:'güven', emoji:'🤝', label:'Güvenilir bir marka gibi duruyor'}
+  ];
+  var scaleLabels = {1:'Kesinlikle katılmıyorum',2:'Katılmıyorum',3:'Pek katılmıyorum',4:'Kararsızım',5:'Biraz katılıyorum',6:'Katılıyorum',7:'Kesinlikle katılıyorum'};
+  var answers = {age:'',gender:'',shop:'',freq:'',ratings:{},pick:'',association:'',nameSuggestion:''};
+  var demoFilled = {age:false,gender:false,shop:false,freq:false};
+  var shuffledBrands = [];
+  var ratingIdx = 0;
+
+  function shuffle(arr) { var a=arr.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;} return a; }
+  function setProgress(p) { document.getElementById('progress').style.width=p+'%'; document.getElementById('progress-pct').textContent=p+'%'; }
+  function showScreen(id) { document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');}); document.getElementById(id).classList.add('active'); window.scrollTo(0,0); }
+  function showStep(id) { document.querySelectorAll('.q-wrap').forEach(function(s){s.classList.remove('active');}); document.getElementById(id).classList.add('active'); window.scrollTo(0,0); }
+  function sendToSheets(data) { var f=new FormData(); f.append('data',JSON.stringify(data)); fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',body:f}).catch(function(){}); }
+
+  // localStorage — cevapları kaydet ve geri yükle
+  function saveState() {
+    try {
+      localStorage.setItem('anket_answers', JSON.stringify(answers));
+      localStorage.setItem('anket_demoFilled', JSON.stringify(demoFilled));
+      localStorage.setItem('anket_shuffled', JSON.stringify(shuffledBrands));
+      localStorage.setItem('anket_ratingIdx', ratingIdx);
+    } catch(e) {}
+  }
+  function loadState() {
+    try {
+      var a = localStorage.getItem('anket_answers');
+      var d = localStorage.getItem('anket_demoFilled');
+      var s = localStorage.getItem('anket_shuffled');
+      var r = localStorage.getItem('anket_ratingIdx');
+      if (a) answers = JSON.parse(a);
+      if (d) demoFilled = JSON.parse(d);
+      if (s && JSON.parse(s).length > 0) shuffledBrands = JSON.parse(s);
+      if (r) ratingIdx = parseInt(r);
+      return !!(a && shuffledBrands.length > 0 && answers.age);
+    } catch(e) { return false; }
+  }
+  function clearState() {
+    try { localStorage.removeItem('anket_answers'); localStorage.removeItem('anket_demoFilled'); localStorage.removeItem('anket_shuffled'); localStorage.removeItem('anket_ratingIdx'); } catch(e) {}
+  }
+
+  // Sayfa açılınca kayıtlı cevap var mı — varsa otomatik devam et
+  var hadSavedState = loadState();
+  if (hadSavedState) {
+    setTimeout(function() { continueFromSave(); }, 0);
+  }
+
+  // INTRO
+  function startFresh() { clearState(); }
+  function continueFromSave() {
+    // Demo seçimlerini geri yükle
+    Object.keys(demoFilled).forEach(function(g) {
+      if (answers[g]) {
+        var el = document.querySelector('.demo-opt[data-group="'+g+'"][data-val="'+answers[g]+'"]');
+        if (el) el.classList.add('sel');
+      }
+    });
+    showScreen('survey');
+    if (shuffledBrands.length > 0 && ratingIdx < shuffledBrands.length) {
+      renderRating(ratingIdx);
+    } else {
+      showStep('s-transition');
+    }
+    setProgress(30 + ratingIdx * 10);
+  }
+  document.getElementById('btn-start').addEventListener('click', function(){ startFresh(); showScreen('survey'); setProgress(5); });
+
+  // S1
+  document.querySelectorAll('.demo-opt').forEach(function(el){
+    el.addEventListener('click', function(){
+      var g=el.getAttribute('data-group'), v=el.getAttribute('data-val');
+      document.querySelectorAll('.demo-opt[data-group="'+g+'"]').forEach(function(o){o.classList.remove('sel');});
+      el.classList.add('sel'); answers[g]=v; demoFilled[g]=true;
+      document.getElementById('btn-s1-next').classList.toggle('on',demoFilled.age&&demoFilled.gender&&demoFilled.shop&&demoFilled.freq);
+      saveState();
+    });
+  });
+  document.getElementById('btn-s1-back').addEventListener('click', function(){ showScreen('intro'); setProgress(0); });
+  document.getElementById('btn-s1-next').addEventListener('click', function(){
+    if (!demoFilled.age||!demoFilled.gender||!demoFilled.shop||!demoFilled.freq) return;
+    shuffledBrands=shuffle(brands); showScreen('survey'); showStep('s-transition'); setProgress(20);
+  });
+
+  // Transition
+  document.getElementById('btn-st-back').addEventListener('click', function(){ showStep('s1'); setProgress(5); });
+  document.getElementById('btn-st-next').addEventListener('click', function(){ showBrandIntro(0); });
+
+  // Brand intro
+  function showBrandIntro(idx) {
+    ratingIdx=idx;
+    document.getElementById('intro-step').textContent='Marka '+(idx+1)+' / '+shuffledBrands.length;
+    document.getElementById('intro-brand-name').textContent=shuffledBrands[idx].id;
+    showStep('s-brand-intro'); setProgress(28+idx*10);
+  }
+  document.getElementById('btn-bi-back').addEventListener('click', function(){ if(ratingIdx>0)showBrandIntro(ratingIdx-1); else{showStep('s-transition');setProgress(20);} });
+  document.getElementById('btn-bi-next').addEventListener('click', function(){ renderRating(ratingIdx); });
+
+  // S2
+  function renderRating(idx) {
+    ratingIdx=idx; var brand=shuffledBrands[idx];
+    document.getElementById('s2-step').textContent='Adım 2 / 4 — Marka '+(idx+1)+' / '+shuffledBrands.length;
+    document.getElementById('s2-brand-above').querySelector('span').textContent=brand.id;
+    var html='<div class="criteria-list">';
+    criteria.forEach(function(c){
+      html+='<div class="criterion"><div class="crit-label"><span class="crit-emoji">'+c.emoji+'</span>'+c.label+'</div>';
+      html+='<input class="crit-range untouched" type="range" min="1" max="7" value="1" id="range-'+c.id+'" data-crit="'+c.id+'">';
+      html+='<div class="crit-nums">';
+      for(var n=1;n<=7;n++) html+='<span class="crit-num" data-crit="'+c.id+'" data-val="'+n+'">'+n+'</span>';
+      html+='</div><div class="scale-label" id="scale-label-'+c.id+'"></div></div>';
+    });
+    html+='</div>';
+    document.getElementById('rating-page').innerHTML=html;
+    criteria.forEach(function(c){
+      var inp=document.getElementById('range-'+c.id);
+      function upd(v){inp.classList.remove('untouched');updateCritUI(c.id,v);saveCrit(brand.id,c.id,v);checkDone();saveState();}
+      inp.addEventListener('input',function(){upd(parseInt(inp.value));});
+      document.querySelectorAll('.crit-num[data-crit="'+c.id+'"]').forEach(function(ne){
+        ne.addEventListener('click',function(){var v=parseInt(ne.getAttribute('data-val'));inp.value=v;upd(v);});
+      });
+    });
+    if(answers.ratings[brand.id]){criteria.forEach(function(c){var v=answers.ratings[brand.id][c.id];if(v){var inp=document.getElementById('range-'+c.id);if(inp){inp.value=v;inp.classList.remove('untouched');updateCritUI(c.id,v);}}});}
+    checkDone(); showStep('s2'); setProgress(30+idx*10);
+  }
+  function updateCritUI(cid,v){document.querySelectorAll('.crit-num[data-crit="'+cid+'"]').forEach(function(el){el.classList.toggle('active',parseInt(el.getAttribute('data-val'))===v);});var l=document.getElementById('scale-label-'+cid);if(l)l.textContent=scaleLabels[v]||'';}
+  function saveCrit(bid,cid,val){if(!answers.ratings[bid])answers.ratings[bid]={};answers.ratings[bid][cid]=val;}
+  function checkDone(){var s=answers.ratings[shuffledBrands[ratingIdx].id]||{};document.getElementById('btn-s2-next').classList.toggle('on',criteria.every(function(c){return s[c.id];}));}
+  document.getElementById('btn-s2-back').addEventListener('click', function(){ showBrandIntro(ratingIdx); });
+  document.getElementById('btn-s2-next').addEventListener('click', function(){
+    if(ratingIdx<shuffledBrands.length-1) showBrandIntro(ratingIdx+1);
+    else{renderPickCards();showStep('s3');setProgress(80);}
+  });
+
+  // S3
+  function renderPickCards(){
+    var c=document.getElementById('pick-cards'); c.innerHTML='';
+    shuffle(brands).forEach(function(b){
+      var d=document.createElement('div'); d.className='pick-card';
+      d.innerHTML='<div class="pc-visual"><div class="vname">'+b.id+'</div><div class="vsub">Smart Snacking</div></div>';
+      d.addEventListener('click',function(){document.querySelectorAll('.pick-card').forEach(function(x){x.classList.remove('sel');});d.classList.add('sel');answers.pick=b.id;document.getElementById('btn-s3-next').classList.add('on');});
+      c.appendChild(d);
+    });
+    var none=document.createElement('div'); none.className='pick-card';
+    none.innerHTML='<div class="pc-none-visual"><div class="pc-none-text">Hiçbirini<br>Beğenmedim</div></div>';
+    none.addEventListener('click',function(){document.querySelectorAll('.pick-card').forEach(function(x){x.classList.remove('sel');});none.classList.add('sel');answers.pick='none';document.getElementById('btn-s3-next').classList.add('on');});
+    c.appendChild(none);
+  }
+  document.getElementById('btn-s3-back').addEventListener('click', function(){ showBrandIntro(shuffledBrands.length-1); setProgress(68); });
+  document.getElementById('btn-s3-next').addEventListener('click', function(){
+    if(!answers.pick) return; setProgress(90);
+    if(answers.pick==='none') showStep('s4a');
+    else{document.getElementById('s4b-title').innerHTML='<strong style="color:#b4906a">'+answers.pick+'</strong> sende ne çağrıştırıyor?';showStep('s4b');}
+  });
+
+  // S4
+  document.getElementById('btn-s4a-back').addEventListener('click',function(){showStep('s3');setProgress(80);});
+  document.getElementById('btn-s4a-send').addEventListener('click',submitSurvey);
+  document.getElementById('btn-s4a-skip').addEventListener('click',submitSurvey);
+  document.getElementById('btn-s4b-back').addEventListener('click',function(){showStep('s3');setProgress(80);});
+  document.getElementById('btn-s4b-send').addEventListener('click',submitSurvey);
+  document.getElementById('btn-s4b-skip').addEventListener('click',submitSurvey);
+
+  function submitSurvey(){
+    answers.association=document.getElementById('association').value||'';
+    answers.nameSuggestion=document.getElementById('name-suggestion').value||'';
+    setProgress(100);
+    if(window.fbq) fbq('track','Lead');
+    var payload={yas:answers.age,cinsiyet:answers.gender,alisveris:answers.shop,atiştırmalık_sıklık:answers.freq,secilen_isim:answers.pick,cagrisim:answers.association,isim_oneri:answers.nameSuggestion,marka_sirasi:shuffledBrands.map(function(b){return b.id;}).join(' → ')};
+    Object.keys(answers.ratings).forEach(function(brand){Object.keys(answers.ratings[brand]).forEach(function(crit){payload[brand+'_'+crit]=answers.ratings[brand][crit];});});
+    sendToSheets(payload);
+    clearState();
+    showScreen('email-screen');
+  }
+
+  // Email capture — Formspree
+  document.getElementById('cap-submit-btn').addEventListener('click', function(){
+    var name=document.getElementById('cap-name').value.trim();
+    var surname=document.getElementById('cap-surname').value.trim();
+    var email=document.getElementById('cap-email').value.trim();
+    if(!name||!email){alert('İsim ve e-posta zorunlu.');return;}
+    fetch('https://api.web3forms.com/submit', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({
+        access_key:'35d1427c-1d6f-466b-85ae-94db6fe8ebae',
+        isim:name, soyisim:surname, email:email
+      })
+    }).catch(function(){});
+    showScreen('share-screen');
+  });
+  document.getElementById('cap-skip-btn').addEventListener('click', function(){ showScreen('share-screen'); });
+
+  // Share
+  document.getElementById('btn-share-whatsapp').addEventListener('click',function(){window.open('https://wa.me/?text='+encodeURIComponent(SHARE_TEXT+' '+SHARE_URL),'_blank');});
+  document.getElementById('btn-share-instagram').addEventListener('click',function(){
+    navigator.clipboard.writeText(SHARE_URL).then(function(){
+      document.getElementById('btn-share-instagram').innerHTML='<span style="font-size:1.2rem;">✓</span> Kopyalandı, Instagram\'a yapıştır!';
+    });
+  });
+  document.getElementById('btn-copy-link').addEventListener('click',function(){
+    navigator.clipboard.writeText(SHARE_URL).then(function(){
+      var btn=document.getElementById('btn-copy-link');
+      btn.innerHTML='<span style="font-size:1.2rem;">✓</span> Kopyalandı!';
+      setTimeout(function(){btn.innerHTML='<span style="font-size:1.2rem;">🔗</span> Linki Kopyala';},2000);
+    });
+  });
+
+}); // DOMContentLoaded
+</script>
+</body>
+</html>
