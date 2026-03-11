@@ -309,7 +309,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function showStep(id) { document.querySelectorAll('.q-wrap').forEach(function(s){s.classList.remove('active');}); document.getElementById(id).classList.add('active'); window.scrollTo(0,0); }
   function sendToSheets(data) { var f=new FormData(); f.append('data',JSON.stringify(data)); fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',body:f}).catch(function(){}); }
 
-  document.getElementById('btn-start').addEventListener('click', function(){ showScreen('survey'); showStep('s1a'); setProgress(5); });
+  document.getElementById('btn-start').addEventListener('click', function(){ if(window.fbq) fbq('trackCustom','SurveyStart'); showScreen('survey'); showStep('s1a'); setProgress(5); });
 
   // S1a
   document.querySelectorAll('.demo-opt[data-group="age"], .demo-opt[data-group="gender"]').forEach(function(el){
