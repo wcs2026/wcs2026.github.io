@@ -38,11 +38,11 @@ body { background:#faf7f2; color:#2a2018; font-family:'DM Sans',sans-serif; min-
 .brand-logo-box { background:#fff; border-radius:16px; padding:28px 24px 20px; display:flex; flex-direction:column; align-items:center; margin-bottom:24px; box-shadow:0 4px 20px rgba(42,32,24,0.07); border:1px solid rgba(42,32,24,0.06); }
 .brand-logo-box .vname { font-family:'Josefin Sans',sans-serif; font-weight:200; font-size:2.2rem; color:#2a2820; letter-spacing:10px; line-height:1; }
 .brand-logo-box .vsub { font-family:'Josefin Sans',sans-serif; font-weight:300; font-size:0.7rem; letter-spacing:3px; color:#aaa; margin-top:8px; }
-.brand-rating-page { width:100%; max-width:500px; }
-.criteria-list { width:100%; display:flex; flex-direction:column; gap:16px; }
-.criterion { background:#fff; border-radius:14px; padding:16px 18px; border:1px solid rgba(42,32,24,0.07); box-shadow:0 2px 10px rgba(42,32,24,0.04); }
-.crit-label { font-size:0.82rem; color:#2a2018; font-weight:400; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
-.crit-emoji { font-size:1.1rem; }
+
+
+
+
+
 .brand-rating-page { width:100%; max-width:500px; }
 .criteria-list { width:100%; display:flex; flex-direction:column; gap:7px; }
 .criterion { background:#fff; border-radius:10px; padding:9px 12px; border:1px solid rgba(42,32,24,0.07); box-shadow:0 2px 8px rgba(42,32,24,0.04); }
@@ -92,7 +92,7 @@ body { background:#faf7f2; color:#2a2018; font-family:'DM Sans',sans-serif; min-
   <h1 style="font-size:clamp(2.4rem,8vw,4rem);font-weight:700;line-height:1.1;margin-bottom:16px;position:relative;z-index:1;color:#fff;letter-spacing:-1px;">Hangi isim<br>daha iyi?</h1>
   <p style="font-size:1rem;color:rgba(255,255,255,0.55);font-weight:300;margin-bottom:40px;position:relative;z-index:1;line-height:1.6;max-width:320px;margin-left:auto;margin-right:auto;">Yeni bir atıştırmalık markası için<br>isim testi yapıyoruz.</p>
   <button class="start-btn" id="btn-start">Ankete Başla →</button>
-  <div style="margin-top:14px;position:relative;z-index:1;font-size:0.78rem;color:rgba(255,255,255,0.4);">🔒 2 dakikalık anonim anket</div>
+  <div style="margin-top:14px;position:relative;z-index:1;font-size:0.78rem;color:rgba(255,255,255,0.4);">🔒 1 dakikalık anonim anket</div>
 </div>
 
 <!-- SURVEY -->
@@ -378,8 +378,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     checkDone(); showStep('s2'); setProgress(30+idx*10);
   }
-function updateCritUI(cid,v){} // artık kullanılmıyor
-  function saveCrit(bid,cid,val){if(!answers.ratings[bid])answers.ratings[bid]={};answers.ratings[bid][cid]=val;}
+function saveCrit(bid,cid,val){if(!answers.ratings[bid])answers.ratings[bid]={};answers.ratings[bid][cid]=val;}
   function checkDone(){var s=answers.ratings[shuffledBrands[ratingIdx].id]||{};document.getElementById('btn-s2-next').classList.toggle('on',criteria.every(function(c){return s[c.id];}));}
   document.getElementById('btn-s2-back').addEventListener('click', function(){ showBrandIntro(ratingIdx); });
   document.getElementById('btn-s2-next').addEventListener('click', function(){
