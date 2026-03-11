@@ -17,11 +17,11 @@ body { background:#faf7f2; color:#2a2018; font-family:'DM Sans',sans-serif; min-
 .progress-bar-track { width:100%; height:28px; background:rgba(42,32,24,0.07); overflow:hidden; }
 .progress-bar { height:100%; background:linear-gradient(90deg,#8a6a40,#b4906a); border-radius:0 6px 6px 0; transition:width 0.6s cubic-bezier(0.4,0,0.2,1); display:flex; align-items:center; justify-content:flex-end; min-width:36px; }
 .progress-pct { font-size:0.65rem; color:#fff; letter-spacing:1.5px; font-weight:500; padding-right:10px; white-space:nowrap; }
-#intro { min-height:100vh; align-items:center; justify-content:center; text-align:center; padding:48px 24px 60px; position:relative; overflow:hidden; background:#1a1410; }
-#intro::before { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:600px; height:600px; background:radial-gradient(circle,rgba(180,144,80,0.12) 0%,transparent 65%); pointer-events:none; }
-.intro-eyebrow { font-size:0.58rem; letter-spacing:6px; color:#b4906a; text-transform:uppercase; margin-bottom:24px; position:relative; z-index:1; opacity:0.8; }
-.start-btn { display:block; width:100%; max-width:400px; padding:22px 48px; background:linear-gradient(135deg,#b4906a,#8a6a40); color:#fff; border:none; border-radius:16px; font-family:'DM Sans',sans-serif; font-size:1.15rem; font-weight:500; cursor:pointer; transition:all 0.25s; position:relative; z-index:1; letter-spacing:1px; box-shadow:0 8px 32px rgba(180,144,80,0.35); margin:0 auto; }
-.start-btn:hover { transform:translateY(-3px); box-shadow:0 12px 40px rgba(180,144,80,0.45); }
+#intro { min-height:100vh; align-items:center; justify-content:center; text-align:center; padding:60px 24px; position:relative; overflow:hidden; background:#faf7f2; }
+#intro::before { content:''; position:absolute; top:-100px; right:-100px; width:500px; height:500px; background:radial-gradient(circle,rgba(180,144,80,0.08) 0%,transparent 60%); pointer-events:none; }
+.intro-eyebrow { font-size:0.6rem; letter-spacing:5px; color:#b4906a; text-transform:uppercase; margin-bottom:20px; position:relative; z-index:1; }
+.start-btn { padding:16px 48px; background:#2a2018; color:#faf7f2; border:none; border-radius:100px; font-family:'DM Sans',sans-serif; font-size:0.85rem; cursor:pointer; transition:all 0.3s; position:relative; z-index:1; letter-spacing:2px; }
+.start-btn:hover { background:#3d3020; transform:translateY(-2px); }
 .start-btn:active { transform:scale(0.97); }
 .q-wrap { flex:1; display:none; flex-direction:column; align-items:center; padding:60px 20px 40px; max-width:600px; margin:0 auto; width:100%; }
 .q-wrap.active { display:flex; }
@@ -89,23 +89,22 @@ input.crit-range.untouched::-webkit-slider-thumb { opacity:0; }
 <!-- INTRO -->
 <div class="screen active" id="intro">
   <div class="intro-eyebrow">Marka Araştırması · 2026</div>
-  <h1 style="font-size:clamp(2.4rem,8vw,4rem);font-weight:700;line-height:1.1;margin-bottom:16px;position:relative;z-index:1;color:#fff;letter-spacing:-1px;">Hangi isim<br>daha iyi?</h1>
-  <p style="font-size:1rem;color:rgba(255,255,255,0.55);font-weight:300;margin-bottom:40px;position:relative;z-index:1;line-height:1.6;max-width:320px;margin-left:auto;margin-right:auto;">Yeni bir atıştırmalık markası için<br>isim testi yapıyoruz.</p>
-  <button class="start-btn" id="btn-start">Ankete Başla →</button>
-  <div style="margin-top:28px;display:flex;flex-direction:column;gap:10px;max-width:320px;margin-left:auto;margin-right:auto;position:relative;z-index:1;">
-    <div style="display:flex;align-items:center;gap:10px;justify-content:center;">
-      <span style="font-size:0.8rem;color:rgba(255,255,255,0.4);">🔒</span>
-      <span style="font-size:0.8rem;color:rgba(255,255,255,0.5);font-weight:300;">Cevapların tamamen anonimdir</span>
+  <h1 style="font-size:clamp(1.8rem,5vw,3rem);font-weight:300;line-height:1.25;margin-bottom:20px;position:relative;z-index:1;color:#2a2018;">Yeni bir atıştırmalık<br>markası doğuyor.</h1>
+  <p style="font-size:1.05rem;color:#5a4a38;font-weight:400;margin-bottom:6px;position:relative;z-index:1;">İsmini seçmemize yardımcı olur musun?</p>
+  <p style="font-size:0.85rem;color:#9a8a70;font-weight:300;margin-bottom:4px;position:relative;z-index:1;">Sen de söz sahibisin — cevapların gerçek bir markayı şekillendirecek.</p>
+  <div style="display:flex;flex-direction:column;gap:12px;margin:28px auto;max-width:360px;width:100%;position:relative;z-index:1;">
+    <div style="background:#fff;border-radius:14px;padding:18px 22px;border:1px solid rgba(42,32,24,0.07);box-shadow:0 2px 12px rgba(42,32,24,0.06);text-align:left;">
+      <div style="font-size:0.6rem;letter-spacing:3px;color:#b4906a;text-transform:uppercase;margin-bottom:10px;">Nasıl çalışır?</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;align-items:flex-start;gap:10px;"><span style="font-size:1rem;margin-top:1px;">🏷️</span><span style="font-size:0.85rem;color:#5a4a38;font-weight:300;line-height:1.5;">5 farklı marka ismi göstereceğiz.</span></div>
+        <div style="display:flex;align-items:flex-start;gap:10px;"><span style="font-size:1rem;margin-top:1px;">⭐</span><span style="font-size:0.85rem;color:#5a4a38;font-weight:300;line-height:1.5;">Her isim için ilk izlenimine göre birkaç soru soracağız.</span></div>
+        <div style="display:flex;align-items:flex-start;gap:10px;"><span style="font-size:1rem;margin-top:1px;">🏆</span><span style="font-size:0.85rem;color:#5a4a38;font-weight:300;line-height:1.5;">En sonunda hangisinin kazanması gerektiğini söyleyeceksin.</span></div>
+      </div>
     </div>
-    <div style="display:flex;align-items:center;gap:10px;justify-content:center;">
-      <span style="font-size:0.8rem;color:rgba(255,255,255,0.4);">👥</span>
-      <span style="font-size:0.8rem;color:rgba(255,255,255,0.5);font-weight:300;">1000+ kişi ankete katıldı</span>
-    </div>
-    <div style="display:flex;align-items:center;gap:10px;justify-content:center;">
-      <span style="font-size:0.8rem;color:rgba(255,255,255,0.4);">⏱</span>
-      <span style="font-size:0.8rem;color:rgba(255,255,255,0.5);font-weight:300;">Ortalama süre: 2 dk 40 sn</span>
-    </div>
+<div style="font-size:0.75rem;color:#b4906a;text-align:center;">🔒 Cevapların tamamen anonimdir</div>
   </div>
+  <button class="start-btn" id="btn-start">Başla →</button>
+  <div style="font-size:0.72rem;color:#c4b4a0;margin-top:12px;position:relative;z-index:1;">⏱ Yaklaşık 3 dakika sürer</div>
 </div>
 
 <!-- SURVEY -->
@@ -288,7 +287,7 @@ input.crit-range.untouched::-webkit-slider-thumb { opacity:0; }
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw8zNzBYiax6GWbOzSMTFRnNQWby9XRRJNDxxvcbEEwhVZ2qB86IOO9QjjcImz0fdUe/exec';
-  var SHARE_URL = 'https://anket.wavecreativestudio.co/v2.html';
+  var SHARE_URL = 'https://anket.wavecreativestudio.co';
   var SHARE_TEXT = 'Yeni bir atıştırmalık markası isim seçiyor — sen de söz sahibi ol!';
 
   var brands = [{id:'NÖTR'},{id:'ZENO'},{id:'KIVO'},{id:'MOYA'},{id:'NUKA'}];
