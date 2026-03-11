@@ -23,7 +23,7 @@ body { background:#faf7f2; color:#2a2018; font-family:'DM Sans',sans-serif; min-
 .start-btn { padding:16px 48px; background:#2a2018; color:#faf7f2; border:none; border-radius:100px; font-family:'DM Sans',sans-serif; font-size:0.85rem; cursor:pointer; transition:all 0.3s; position:relative; z-index:1; letter-spacing:2px; }
 .start-btn:hover { background:#3d3020; transform:translateY(-2px); }
 .start-btn:active { transform:scale(0.97); }
-.q-wrap { flex:1; display:none; flex-direction:column; align-items:center; padding:60px 20px 40px; max-width:600px; margin:0 auto; width:100%; }
+.q-wrap { flex:1; display:none; flex-direction:column; align-items:center; padding:48px 16px 24px; max-width:600px; margin:0 auto; width:100%; }
 .q-wrap.active { display:flex; }
 .q-step { font-size:0.55rem; letter-spacing:4px; color:#b4906a; text-transform:uppercase; margin-bottom:12px; }
 .q-title { font-size:clamp(1.3rem,4vw,1.8rem); font-weight:300; color:#2a2018; text-align:center; margin-bottom:6px; line-height:1.3; }
@@ -39,19 +39,14 @@ body { background:#faf7f2; color:#2a2018; font-family:'DM Sans',sans-serif; min-
 .brand-logo-box .vname { font-family:'Josefin Sans',sans-serif; font-weight:200; font-size:2.2rem; color:#2a2820; letter-spacing:10px; line-height:1; }
 .brand-logo-box .vsub { font-family:'Josefin Sans',sans-serif; font-weight:300; font-size:0.7rem; letter-spacing:3px; color:#aaa; margin-top:8px; }
 .brand-rating-page { width:100%; max-width:500px; }
-.criteria-list { width:100%; display:flex; flex-direction:column; gap:16px; }
-.criterion { background:#fff; border-radius:14px; padding:16px 18px; border:1px solid rgba(42,32,24,0.07); box-shadow:0 2px 10px rgba(42,32,24,0.04); }
-.crit-label { font-size:0.82rem; color:#2a2018; font-weight:400; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
-.crit-emoji { font-size:1.1rem; }
-input.crit-range { width:100%; -webkit-appearance:none; appearance:none; height:3px; background:rgba(42,32,24,0.1); border-radius:2px; outline:none; cursor:pointer; margin-bottom:8px; display:block; }
-input.crit-range::-webkit-slider-thumb { -webkit-appearance:none; width:22px; height:22px; border-radius:50%; background:#2a2018; cursor:pointer; box-shadow:0 2px 8px rgba(42,32,24,0.2); transition:transform 0.15s; }
-input.crit-range::-webkit-slider-thumb:hover { transform:scale(1.1); }
-input.crit-range.untouched::-webkit-slider-thumb { opacity:0; }
-.crit-nums { display:flex; justify-content:space-between; }
-.crit-num { font-size:0.6rem; color:#ccc; cursor:pointer; transition:all 0.15s; width:20px; text-align:center; padding:3px 0; border-radius:4px; }
-.crit-num:hover { color:#8a6a40; }
-.crit-num.active { color:#2a2018; font-weight:700; background:#fdf8f2; }
-.scale-label { font-size:0.65rem; color:#b4906a; text-align:center; margin-top:6px; min-height:16px; letter-spacing:0.5px; font-style:italic; }
+.criteria-list { width:100%; display:flex; flex-direction:column; gap:10px; }
+.criterion { background:#fff; border-radius:12px; padding:12px 14px; border:1px solid rgba(42,32,24,0.07); box-shadow:0 2px 8px rgba(42,32,24,0.04); }
+.crit-label { font-size:0.8rem; color:#2a2018; font-weight:400; margin-bottom:10px; display:flex; align-items:center; gap:7px; }
+.crit-emoji { font-size:1rem; }
+.crit-btns { display:grid; grid-template-columns:repeat(7,1fr); gap:5px; }
+.crit-btn { aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; border:1.5px solid rgba(42,32,24,0.12); border-radius:8px; font-size:0.85rem; color:#9a8a70; cursor:pointer; transition:all 0.12s; background:#faf7f2; font-family:'DM Sans',sans-serif; user-select:none; -webkit-tap-highlight-color:transparent; }
+.crit-btn:active { transform:scale(0.88); }
+.crit-btn.sel { background:#2a2018; color:#fff; border-color:#2a2018; font-weight:600; transform:scale(1.08); }
 .pick-cards { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; width:100%; max-width:560px; }
 .pick-card { border:1.5px solid rgba(42,32,24,0.12); border-radius:14px; overflow:hidden; cursor:pointer; transition:all 0.2s; background:#fff; }
 .pick-card:hover { border-color:#b4906a; transform:translateY(-2px); }
@@ -197,12 +192,12 @@ input.crit-range.untouched::-webkit-slider-thumb { opacity:0; }
   </div>
 
   <div class="q-wrap" id="s2">
-    <div class="q-step" id="s2-step">Adım 2 / 4</div>
-    <div id="s2-brand-above" style="background:#fff;border-radius:16px;padding:28px 32px;box-shadow:0 4px 20px rgba(42,32,24,0.07);border:1px solid rgba(42,32,24,0.06);margin-bottom:24px;width:100%;max-width:500px;text-align:center;"><span style="font-family:'Josefin Sans',sans-serif;font-weight:200;font-size:2.2rem;color:#2a2820;letter-spacing:10px;"></span></div>
-    <div class="q-title" style="margin-bottom:4px;">Bu marka sana ne hissettiriyor?</div>
-    <div class="q-hint">Her kriteri 1–7 arası puanla</div>
+    <div class="q-step" id="s2-step">Adım 3 / 5</div>
+    <div id="s2-brand-above" style="background:#1a1410;border-radius:14px;padding:22px 32px;border:2px solid #2a2018;margin-bottom:12px;width:100%;max-width:500px;text-align:center;display:flex;align-items:center;justify-content:center;"><span style="font-family:'Josefin Sans',sans-serif;font-weight:100;font-size:2.2rem;color:#fff;letter-spacing:0.35em;text-transform:uppercase;padding-left:0.35em;"></span></div>
+    <div class="q-title" style="margin-bottom:2px;font-size:1.1rem;">Bu marka sana ne hissettiriyor?</div>
+    <div class="q-hint" style="margin-bottom:14px;font-size:0.72rem;">Her kriteri 1–7 arası puanla</div>
     <div class="brand-rating-page" id="rating-page"></div>
-    <div class="q-nav">
+    <div class="q-nav" style="padding:16px 0 24px;">
       <button class="back-btn" id="btn-s2-back">← Geri</button>
       <button class="next-btn" id="btn-s2-next">Devam →</button>
     </div>
@@ -363,25 +358,34 @@ document.addEventListener('DOMContentLoaded', function() {
     var html='<div class="criteria-list">';
     criteria.forEach(function(c){
       html+='<div class="criterion"><div class="crit-label"><span class="crit-emoji">'+c.emoji+'</span>'+c.label+'</div>';
-      html+='<input class="crit-range untouched" type="range" min="1" max="7" value="1" id="range-'+c.id+'" data-crit="'+c.id+'">';
-      html+='<div class="crit-nums">';
-      for(var n=1;n<=7;n++) html+='<span class="crit-num" data-crit="'+c.id+'" data-val="'+n+'">'+n+'</span>';
-      html+='</div><div class="scale-label" id="scale-label-'+c.id+'"></div></div>';
+      html+='<div class="scale-label" id="scale-label-'+c.id+'" style="font-size:0.62rem;color:#b4906a;height:14px;margin-bottom:4px;font-style:italic;overflow:hidden;"></div>';
+      html+='<div class="crit-btns" id="btns-'+c.id+'">';
+      for(var n=1;n<=7;n++) html+='<div class="crit-btn" data-crit="'+c.id+'" data-val="'+n+'">'+n+'</div>';
+      html+='</div></div>';
     });
     html+='</div>';
     document.getElementById('rating-page').innerHTML=html;
     criteria.forEach(function(c){
-      var inp=document.getElementById('range-'+c.id);
-      function upd(v){inp.classList.remove('untouched');updateCritUI(c.id,v);saveCrit(brand.id,c.id,v);checkDone();}
-      inp.addEventListener('input',function(){upd(parseInt(inp.value));});
-      document.querySelectorAll('.crit-num[data-crit="'+c.id+'"]').forEach(function(ne){
-        ne.addEventListener('click',function(){var v=parseInt(ne.getAttribute('data-val'));inp.value=v;upd(v);});
+      document.querySelectorAll('.crit-btn[data-crit="'+c.id+'"]').forEach(function(btn){
+        btn.addEventListener('click',function(){
+          var v=parseInt(btn.getAttribute('data-val'));
+          document.querySelectorAll('.crit-btn[data-crit="'+c.id+'"]').forEach(function(b){b.classList.remove('sel');});
+          btn.classList.add('sel');
+          var lbl=document.getElementById('scale-label-'+c.id);
+          if(lbl) lbl.textContent=scaleLabels[v]||'';
+          saveCrit(brand.id,c.id,v); checkDone();
+        });
       });
     });
-    if(answers.ratings[brand.id]){criteria.forEach(function(c){var v=answers.ratings[brand.id][c.id];if(v){var inp=document.getElementById('range-'+c.id);if(inp){inp.value=v;inp.classList.remove('untouched');updateCritUI(c.id,v);}}});}
+    if(answers.ratings[brand.id]){
+      criteria.forEach(function(c){
+        var v=answers.ratings[brand.id][c.id];
+        if(v){var btn=document.querySelector('.crit-btn[data-crit="'+c.id+'"][data-val="'+v+'"]');if(btn){btn.classList.add('sel');var lbl=document.getElementById('scale-label-'+c.id);if(lbl)lbl.textContent=scaleLabels[v]||'';}}
+      });
+    }
     checkDone(); showStep('s2'); setProgress(30+idx*10);
   }
-  function updateCritUI(cid,v){document.querySelectorAll('.crit-num[data-crit="'+cid+'"]').forEach(function(el){el.classList.toggle('active',parseInt(el.getAttribute('data-val'))===v);});var l=document.getElementById('scale-label-'+cid);if(l)l.textContent=scaleLabels[v]||'';}
+  function updateCritUI(cid,v){} // artık kullanılmıyor
   function saveCrit(bid,cid,val){if(!answers.ratings[bid])answers.ratings[bid]={};answers.ratings[bid][cid]=val;}
   function checkDone(){var s=answers.ratings[shuffledBrands[ratingIdx].id]||{};document.getElementById('btn-s2-next').classList.toggle('on',criteria.every(function(c){return s[c.id];}));}
   document.getElementById('btn-s2-back').addEventListener('click', function(){ showBrandIntro(ratingIdx); });
