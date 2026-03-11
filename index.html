@@ -13,7 +13,7 @@
 body { background:#faf7f2; color:#2a2018; font-family:'DM Sans',sans-serif; min-height:100vh; }
 .screen { display:none; }
 .screen.active { display:flex; flex-direction:column; min-height:100vh; }
-.progress-bar-wrap { position:fixed; top:0; left:0; right:0; z-index:100; }
+.progress-bar-wrap { position:relative; top:0; left:0; right:0; }
 .progress-bar-track { width:100%; height:28px; background:rgba(42,32,24,0.07); overflow:hidden; }
 .progress-bar { height:100%; background:linear-gradient(90deg,#8a6a40,#b4906a); border-radius:0 6px 6px 0; transition:width 0.6s cubic-bezier(0.4,0,0.2,1); display:flex; align-items:center; justify-content:flex-end; min-width:36px; }
 .progress-pct { font-size:0.65rem; color:#fff; letter-spacing:1.5px; font-weight:500; padding-right:10px; white-space:nowrap; }
@@ -23,7 +23,7 @@ body { background:#faf7f2; color:#2a2018; font-family:'DM Sans',sans-serif; min-
 .start-btn { padding:16px 48px; background:#2a2018; color:#faf7f2; border:none; border-radius:100px; font-family:'DM Sans',sans-serif; font-size:0.85rem; cursor:pointer; transition:all 0.3s; position:relative; z-index:1; letter-spacing:2px; }
 .start-btn:hover { background:#3d3020; transform:translateY(-2px); }
 .start-btn:active { transform:scale(0.97); }
-.q-wrap { flex:1; display:none; flex-direction:column; align-items:center; padding:40px 16px 16px; max-width:600px; margin:0 auto; width:100%; }
+.q-wrap { flex:1; display:none; flex-direction:column; align-items:center; padding:24px 16px 16px; max-width:600px; margin:0 auto; width:100%; }
 .q-wrap.active { display:flex; }
 .q-step { font-size:0.55rem; letter-spacing:4px; color:#b4906a; text-transform:uppercase; margin-bottom:12px; }
 .q-title { font-size:clamp(1.3rem,4vw,1.8rem); font-weight:300; color:#2a2018; text-align:center; margin-bottom:6px; line-height:1.3; }
@@ -300,8 +300,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function shuffle(arr) { var a=arr.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;} return a; }
   function setProgress(p) { document.getElementById('progress').style.width=p+'%'; document.getElementById('progress-pct').textContent=p+'%'; }
-  function showScreen(id) { document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');}); document.getElementById(id).classList.add('active'); window.scrollTo(0,0); document.body.scrollTop=0; document.documentElement.scrollTop=0; }
-  function showStep(id) { document.querySelectorAll('.q-wrap').forEach(function(s){s.classList.remove('active');}); document.getElementById(id).classList.add('active'); window.scrollTo(0,0); document.body.scrollTop=0; document.documentElement.scrollTop=0; }
+  function showScreen(id) { document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');}); document.getElementById(id).classList.add('active'); setTimeout(function(){window.scrollTo(0,0);document.body.scrollTop=0;document.documentElement.scrollTop=0;},0); }
+  function showStep(id) { document.querySelectorAll('.q-wrap').forEach(function(s){s.classList.remove('active');}); document.getElementById(id).classList.add('active'); setTimeout(function(){window.scrollTo(0,0);document.body.scrollTop=0;document.documentElement.scrollTop=0;},0); }
   function sendToSheets(data) { var f=new FormData(); f.append('data',JSON.stringify(data)); fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',body:f}).catch(function(){}); }
 
   document.getElementById('btn-start').addEventListener('click', function(){ if(window.fbq) fbq('trackCustom','SurveyStart'); showScreen('survey'); showStep('s1a'); setProgress(5); });
