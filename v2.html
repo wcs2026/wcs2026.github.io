@@ -415,7 +415,7 @@ function saveCrit(bid,cid,val){if(!answers.ratings[bid])answers.ratings[bid]={};
   document.getElementById('btn-s4b-send').addEventListener('click',submitSurvey);
   document.getElementById('btn-s4b-skip').addEventListener('click',submitSurvey);
 
-    function submitSurvey(){
+  function submitSurvey(){
   answers.association=document.getElementById('association').value||'';
   answers.nameSuggestion=document.getElementById('name-suggestion').value||'';
   setProgress(100);
