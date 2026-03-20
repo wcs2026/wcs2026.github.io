@@ -6,8 +6,8 @@
 <title>Marka Anketi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,200;0,300;0,400;0,500;1,300&family=Josefin+Sans:wght@100;200;300;400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,200;0,300;0,400;0,500;1,300&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet"></noscript>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,200;0,300;0,400;0,500;1,300&family=Outfit:wght@200;300;400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,200;0,300;0,400;0,500;1,300&family=Outfit:wght@200;300;400&display=swap" rel="stylesheet"></noscript>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 body { background:#faf7f2; color:#2a2018; font-family:'DM Sans',sans-serif; min-height:100vh; }
@@ -36,13 +36,8 @@ body { background:#faf7f2; color:#2a2018; font-family:'DM Sans',sans-serif; min-
 .demo-opt:active { transform:scale(0.93); }
 .demo-opt.sel { border-color:#8a6a40; background:#fdf8f2; color:#2a2018; font-weight:500; }
 .brand-logo-box { background:#fff; border-radius:16px; padding:28px 24px 20px; display:flex; flex-direction:column; align-items:center; margin-bottom:24px; box-shadow:0 4px 20px rgba(42,32,24,0.07); border:1px solid rgba(42,32,24,0.06); }
-.brand-logo-box .vname { font-family:'Josefin Sans',sans-serif; font-weight:200; font-size:2.2rem; color:#2a2820; letter-spacing:10px; line-height:1; }
-.brand-logo-box .vsub { font-family:'Josefin Sans',sans-serif; font-weight:300; font-size:0.7rem; letter-spacing:3px; color:#aaa; margin-top:8px; }
-
-
-
-
-
+.brand-logo-box .vname { font-family:'Outfit',sans-serif; font-weight:200; font-size:2.8rem; color:#2a2820; letter-spacing:12px; line-height:1; }
+.brand-logo-box .vsub { display:none; }
 .brand-rating-page { width:100%; max-width:500px; }
 .criteria-list { width:100%; display:flex; flex-direction:column; gap:7px; }
 .criterion { background:#fff; border-radius:10px; padding:9px 12px; border:1px solid rgba(42,32,24,0.07); box-shadow:0 2px 8px rgba(42,32,24,0.04); }
@@ -52,13 +47,13 @@ body { background:#faf7f2; color:#2a2018; font-family:'DM Sans',sans-serif; min-
 .crit-btn { aspect-ratio:1/1; display:flex; align-items:center; justify-content:center; border:1.5px solid rgba(42,32,24,0.12); border-radius:8px; font-size:0.85rem; color:#9a8a70; cursor:pointer; transition:all 0.12s; background:#faf7f2; font-family:'DM Sans',sans-serif; user-select:none; -webkit-tap-highlight-color:transparent; }
 .crit-btn:active { transform:scale(0.88); }
 .crit-btn.sel { background:#2a2018; color:#fff; border-color:#2a2018; font-weight:600; transform:scale(1.08); }
-.pick-cards { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; width:100%; max-width:560px; }
+.pick-cards { display:grid; grid-template-columns:1fr 1fr; gap:10px; width:100%; max-width:560px; }
 .pick-card { border:1.5px solid rgba(42,32,24,0.12); border-radius:14px; overflow:hidden; cursor:pointer; transition:all 0.2s; background:#fff; }
 .pick-card:hover { border-color:#b4906a; transform:translateY(-2px); }
 .pick-card.sel { border-color:#8a6a40; box-shadow:0 4px 20px rgba(42,32,24,0.12); }
 .pc-visual { aspect-ratio:1/1; width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:12px; background:#fff; }
-.pc-visual .vname { font-family:'Josefin Sans',sans-serif; font-weight:200; font-size:1.3rem; color:#2a2820; letter-spacing:6px; text-align:center; }
-.pc-visual .vsub { font-family:'Josefin Sans',sans-serif; font-weight:300; font-size:0.5rem; letter-spacing:2px; color:#aaa; margin-top:6px; text-align:center; }
+.pc-visual .vname { font-family:'Outfit',sans-serif; font-weight:200; font-size:1.6rem; color:#2a2820; letter-spacing:8px; text-align:center; }
+.pc-visual .vsub { display:none; }
 .pc-none-visual { aspect-ratio:1/1; width:100%; display:flex; align-items:center; justify-content:center; background:#f8f8f8; }
 .pc-none-text { font-size:0.78rem; color:#bbb; text-align:center; font-weight:300; line-height:1.5; }
 .open-input { width:100%; background:#fff; border:1px solid rgba(42,32,24,0.15); border-radius:16px; padding:20px; color:#2a2018; font-family:'DM Sans',sans-serif; font-size:0.9rem; font-weight:300; line-height:1.7; resize:none; outline:none; transition:border-color 0.2s; min-height:140px; box-shadow:0 2px 12px rgba(42,32,24,0.06); }
@@ -71,7 +66,7 @@ body { background:#faf7f2; color:#2a2018; font-family:'DM Sans',sans-serif; min-
 .back-btn { padding:14px 20px; background:transparent; border:none; color:#c4b4a0; font-family:'DM Sans',sans-serif; font-size:0.8rem; cursor:pointer; transition:all 0.2s; letter-spacing:1px; }
 .back-btn:hover { color:#8a6a40; }
 .skip-btn { padding:14px 24px; background:transparent; border:1px solid rgba(42,32,24,0.15); color:#9a8a70; border-radius:100px; font-family:'DM Sans',sans-serif; font-size:0.8rem; cursor:pointer; }
-@media (max-width:500px) { .pick-cards { grid-template-columns:1fr 1fr; } .demo-opts { gap:8px; } }
+@media (max-width:500px) { .demo-opts { gap:8px; } }
 </style>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8VCKTX3ZSB"></script>
@@ -159,7 +154,7 @@ body { background:#faf7f2; color:#2a2018; font-family:'DM Sans',sans-serif; min-
     <div style="font-size:0.6rem;letter-spacing:4px;color:#b4906a;text-transform:uppercase;margin-bottom:16px;">Harika, teşekkürler</div>
     <div style="font-size:clamp(1.8rem,5vw,2.6rem);font-weight:300;color:#2a2018;line-height:1.25;margin-bottom:32px;">Şimdi isimlere<br>geçiyoruz.</div>
     <div style="background:#fff;border-radius:16px;padding:24px;max-width:360px;width:100%;border:1px solid rgba(42,32,24,0.07);box-shadow:0 4px 20px rgba(42,32,24,0.06);margin-bottom:40px;display:flex;flex-direction:column;gap:20px;">
-      <div style="display:flex;align-items:center;gap:16px;text-align:left;"><div style="font-size:1.4rem;width:36px;text-align:center;flex-shrink:0;">🏷️</div><div><div style="font-size:0.85rem;font-weight:500;color:#2a2018;margin-bottom:2px;">5 marka ismi</div><div style="font-size:0.75rem;color:#9a8a70;font-weight:300;">Her ismi sana birer birer göstereceğiz</div></div></div>
+      <div style="display:flex;align-items:center;gap:16px;text-align:left;"><div style="font-size:1.4rem;width:36px;text-align:center;flex-shrink:0;">🏷️</div><div><div style="font-size:0.85rem;font-weight:500;color:#2a2018;margin-bottom:2px;">4 marka ismi</div><div style="font-size:0.75rem;color:#9a8a70;font-weight:300;">Her ismi sana birer birer göstereceğiz</div></div></div>
       <div style="height:1px;background:rgba(42,32,24,0.06);"></div>
       <div style="display:flex;align-items:center;gap:16px;text-align:left;"><div style="font-size:1.4rem;width:36px;text-align:center;flex-shrink:0;">⭐</div><div><div style="font-size:0.85rem;font-weight:500;color:#2a2018;margin-bottom:2px;">Her isim için 4 soru</div><div style="font-size:0.75rem;color:#9a8a70;font-weight:300;">İlk izlenimine göre puanlamanı isteyeceğiz</div></div></div>
       <div style="height:1px;background:rgba(42,32,24,0.06);"></div>
@@ -172,11 +167,10 @@ body { background:#faf7f2; color:#2a2018; font-family:'DM Sans',sans-serif; min-
   </div>
 
   <div class="q-wrap" id="s-brand-intro" style="justify-content:center;text-align:center;">
-    <div class="q-step" id="intro-step">Marka 1 / 5</div>
+    <div class="q-step" id="intro-step">Marka 1 / 4</div>
     <div style="font-size:0.85rem;color:#b4906a;font-weight:300;margin-bottom:32px;letter-spacing:1px;">Markaya kısa bir göz at. Sonraki adımda birkaç soruda puanlayacaksın.</div>
     <div class="brand-logo-box" style="max-width:340px;width:100%;padding:48px 32px;margin-bottom:40px;">
       <div class="vname" id="intro-brand-name"></div>
-      <div class="vsub">Smart Snacking</div>
     </div>
     <div class="q-nav" style="padding:0;">
       <button class="back-btn" id="btn-bi-back">← Geri</button>
@@ -184,9 +178,9 @@ body { background:#faf7f2; color:#2a2018; font-family:'DM Sans',sans-serif; min-
     </div>
   </div>
 
-<div class="q-wrap" id="s2">
+  <div class="q-wrap" id="s2">
     <div class="q-step" id="s2-step">Adım 3 / 5</div>
-    <div id="s2-brand-above" style="background:#1a1410;border-radius:14px;padding:22px 32px;border:2px solid #2a2018;margin-bottom:8px;width:100%;max-width:500px;text-align:center;display:flex;align-items:center;justify-content:center;"><span style="font-family:'Josefin Sans',sans-serif;font-weight:100;font-size:2.2rem;color:#fff;letter-spacing:0.35em;text-transform:uppercase;padding-left:0.35em;"></span></div>
+    <div id="s2-brand-above" style="background:#1a1410;border-radius:14px;padding:22px 32px;border:2px solid #2a2018;margin-bottom:8px;width:100%;max-width:500px;text-align:center;display:flex;align-items:center;justify-content:center;"><span style="font-family:'Outfit',sans-serif;font-weight:200;font-size:2.6rem;color:#fff;letter-spacing:0.25em;"></span></div>
     <div class="q-title" style="margin-bottom:2px;font-size:1rem;">Bu marka sana ne hissettiriyor?</div>
     <div class="q-hint" style="margin-bottom:8px;font-size:0.72rem;">Her kriteri 1–7 arası puanla</div>
     <div class="brand-rating-page" id="rating-page"></div>
@@ -274,11 +268,11 @@ body { background:#faf7f2; color:#2a2018; font-family:'DM Sans',sans-serif; min-
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz3KRczRD_WyraDB3MDLBiIEA7EQ5p-WCn__QxvjNOy3pxYl300fpoTlXaTRVAo-Cr4/exec';
+  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz_1B9u4PDRzZ-VrdHK5mlAqIPwlAfplXlSD9_i04sKsJ8VRsIH2LHkv5uNl4dnqvTS/exec';
   var SHARE_URL = 'https://anket.wavecreativestudio.co/v2.html';
   var SHARE_TEXT = 'Yeni bir atıştırmalık markası isim seçiyor — sen de söz sahibi ol!';
 
-  var brands = [{id:'NÖTR'},{id:'ZENO'},{id:'KIVO'},{id:'MOYA'},{id:'NUKA'}];
+  var brands = [{id:'kivo'},{id:'moya'},{id:'fior'},{id:'forenzi'},{id:'fitby'}];
   var criteria = [
     {id:'alırım', emoji:'🛒', label:'Rafta görürsem satın alırım'},
     {id:'premium', emoji:'✨', label:'Şık ve premium hissettiriyor'},
@@ -338,7 +332,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ratingIdx=idx;
     document.getElementById('intro-step').textContent='Marka '+(idx+1)+' / '+shuffledBrands.length;
     document.getElementById('intro-brand-name').textContent=shuffledBrands[idx].id;
-    showStep('s-brand-intro'); setProgress(28+idx*10);
+    showStep('s-brand-intro'); setProgress(28+idx*12);
   }
   document.getElementById('btn-bi-back').addEventListener('click', function(){ if(ratingIdx>0)showBrandIntro(ratingIdx-1); else{showStep('s-transition');setProgress(20);} });
   document.getElementById('btn-bi-next').addEventListener('click', function(){ renderRating(ratingIdx); });
@@ -376,9 +370,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if(v){var btn=document.querySelector('.crit-btn[data-crit="'+c.id+'"][data-val="'+v+'"]');if(btn){btn.classList.add('sel');var lbl=document.getElementById('scale-label-'+c.id);if(lbl)lbl.textContent=scaleLabels[v]||'';}}
       });
     }
-    checkDone(); showStep('s2'); setProgress(30+idx*10);
+    checkDone(); showStep('s2'); setProgress(32+idx*12);
   }
-function saveCrit(bid,cid,val){if(!answers.ratings[bid])answers.ratings[bid]={};answers.ratings[bid][cid]=val;}
+  function saveCrit(bid,cid,val){if(!answers.ratings[bid])answers.ratings[bid]={};answers.ratings[bid][cid]=val;}
   function checkDone(){var s=answers.ratings[shuffledBrands[ratingIdx].id]||{};document.getElementById('btn-s2-next').classList.toggle('on',criteria.every(function(c){return s[c.id];}));}
   document.getElementById('btn-s2-back').addEventListener('click', function(){ showBrandIntro(ratingIdx); });
   document.getElementById('btn-s2-next').addEventListener('click', function(){
@@ -391,7 +385,7 @@ function saveCrit(bid,cid,val){if(!answers.ratings[bid])answers.ratings[bid]={};
     var c=document.getElementById('pick-cards'); c.innerHTML='';
     shuffle(brands).forEach(function(b){
       var d=document.createElement('div'); d.className='pick-card';
-      d.innerHTML='<div class="pc-visual"><div class="vname">'+b.id+'</div><div class="vsub">Smart Snacking</div></div>';
+      d.innerHTML='<div class="pc-visual"><div class="vname">'+b.id+'</div></div>';
       d.addEventListener('click',function(){document.querySelectorAll('.pick-card').forEach(function(x){x.classList.remove('sel');});d.classList.add('sel');answers.pick=b.id;document.getElementById('btn-s3-next').classList.add('on');});
       c.appendChild(d);
     });
@@ -416,41 +410,28 @@ function saveCrit(bid,cid,val){if(!answers.ratings[bid])answers.ratings[bid]={};
   document.getElementById('btn-s4b-skip').addEventListener('click',submitSurvey);
 
   function submitSurvey(){
-  answers.association=document.getElementById('association').value||'';
-  answers.nameSuggestion=document.getElementById('name-suggestion').value||'';
-  setProgress(100);
-
-  if(window.fbq){
-    fbq('track','Lead',{
-      age: answers.age,
-      gender: answers.gender,
-      shopping_type: answers.shop,
-      snack_freq: answers.freq
+    answers.association=document.getElementById('association').value||'';
+    answers.nameSuggestion=document.getElementById('name-suggestion').value||'';
+    setProgress(100);
+    if(window.fbq){
+      fbq('track','Lead',{age:answers.age,gender:answers.gender,shopping_type:answers.shop,snack_freq:answers.freq});
+    }
+    var payload={
+      yas:answers.age,cinsiyet:answers.gender,alisveris:answers.shop,
+      atiştırmalık_sıklık:answers.freq,secilen_isim:answers.pick,
+      cagrisim:answers.association,isim_oneri:answers.nameSuggestion,
+      marka_sirasi:shuffledBrands.map(function(b){return b.id;}).join(' → ')
+    };
+    Object.keys(answers.ratings).forEach(function(brand){
+      Object.keys(answers.ratings[brand]).forEach(function(crit){
+        payload[brand+'_'+crit]=answers.ratings[brand][crit];
+      });
     });
+    sendToSheets(payload);
+    showScreen('email-screen');
   }
 
-  var payload={
-    yas:answers.age,
-    cinsiyet:answers.gender,
-    alisveris:answers.shop,
-    atiştırmalık_sıklık:answers.freq,
-    secilen_isim:answers.pick,
-    cagrisim:answers.association,
-    isim_oneri:answers.nameSuggestion,
-    marka_sirasi:shuffledBrands.map(function(b){return b.id;}).join(' → ')
-  };
-
-  Object.keys(answers.ratings).forEach(function(brand){
-    Object.keys(answers.ratings[brand]).forEach(function(crit){
-      payload[brand+'_'+crit]=answers.ratings[brand][crit];
-    });
-  });
-
-  sendToSheets(payload);
-  showScreen('email-screen');
-  }
-
-  // Email capture — Formspree
+  // Email capture
   document.getElementById('cap-submit-btn').addEventListener('click', function(){
     var name=document.getElementById('cap-name').value.trim();
     var surname=document.getElementById('cap-surname').value.trim();
@@ -459,10 +440,7 @@ function saveCrit(bid,cid,val){if(!answers.ratings[bid])answers.ratings[bid]={};
     fetch('https://api.web3forms.com/submit', {
       method:'POST',
       headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify({
-        access_key:'35d1427c-1d6f-466b-85ae-94db6fe8ebae',
-        isim:name, soyisim:surname, email:email
-      })
+      body:JSON.stringify({access_key:'35d1427c-1d6f-466b-85ae-94db6fe8ebae',isim:name,soyisim:surname,email:email})
     }).catch(function(){});
     showScreen('share-screen');
   });
