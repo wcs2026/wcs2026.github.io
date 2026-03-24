@@ -280,7 +280,7 @@ body { background:#faf7f2; color:#2a2018; font-family:'DM Sans',sans-serif; min-
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw2F-q-A10Bzmo8TeHJSdhO-xKT-HMaNoaTe_LUebNbp9tJhJugdn1-Z-EVlGm5b9uc/exec';
+  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx5Yd1N5J7LGwU8Qh_CEB2MDjkaPXEdMKgVNu4HWYQveECwpkdmX3V0Jf1vWIPgQQTz/exec';
   var SHARE_URL = 'https://anket.wavecreativestudio.co';
   var SHARE_TEXT = 'Yeni bir atıştırmalık markası isim seçiyor — sen de söz sahibi ol!';
 
@@ -432,11 +432,13 @@ document.addEventListener('DOMContentLoaded', function() {
         fbq('track','Lead',{age:answers.age,gender:answers.gender,shopping_type:answers.shop,snack_freq:answers.freq});
       }
     }
+    var utmParams=(function(){var p=new URLSearchParams(window.location.search);return{utm_campaign:p.get('utm_campaign')||'',utm_adset:p.get('utm_content')||'',utm_ad:p.get('utm_term')||''};})();
     var payload={
       yas:answers.age,cinsiyet:answers.gender,alisveris:answers.shop,
       snack_freq:answers.freq,secilen_isim:answers.pick,
       cagrisim:answers.association,isim_oneri:answers.nameSuggestion,
-      marka_sirasi:shuffledBrands.map(function(b){return b.id;}).join(' → ')
+      marka_sirasi:shuffledBrands.map(function(b){return b.id;}).join(' → '),
+      utm_campaign:utmParams.utm_campaign,utm_adset:utmParams.utm_adset,utm_ad:utmParams.utm_ad
     };
     Object.keys(answers.ratings).forEach(function(brand){
       Object.keys(answers.ratings[brand]).forEach(function(crit){
