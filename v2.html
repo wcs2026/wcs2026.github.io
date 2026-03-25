@@ -268,11 +268,11 @@ body { background:#faf7f2; color:#2a2018; font-family:'DM Sans',sans-serif; min-
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx5Yd1N5J7LGwU8Qh_CEB2MDjkaPXEdMKgVNu4HWYQveECwpkdmX3V0Jf1vWIPgQQTz/exec';
+  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyozbV67ijwKFl_1FxZ4u9mLw2XZ6NfwbmC4yOE4zuO_I_yttISC6HP0Z4XuhI0BCL7/exec';
   var SHARE_URL = 'https://anket.wavecreativestudio.co/v2.html';
   var SHARE_TEXT = 'Yeni bir atıştırmalık markası isim seçiyor — sen de söz sahibi ol!';
 
-  var brands = [{id:'fior'},{id:'sora'},{id:'fitby'},{id:'forenzi'},{id:'retto'}];
+  var brands = [{id:'fior',label:'fior'},{id:'notr',label:'nötr'},{id:'fitby',label:'fitby'},{id:'forenzi',label:'forenzi'},{id:'retto',label:'retto'}];
   var criteria = [
     {id:'alırım', emoji:'🛒', label:'Rafta görürsem satın alırım'},
     {id:'premium', emoji:'✨', label:'Şık ve premium hissettiriyor'},
@@ -331,7 +331,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function showBrandIntro(idx) {
     ratingIdx=idx;
     document.getElementById('intro-step').textContent='Marka '+(idx+1)+' / '+shuffledBrands.length;
-    document.getElementById('intro-brand-name').textContent=shuffledBrands[idx].id;
+    document.getElementById('intro-brand-name').textContent=shuffledBrands[idx].label||shuffledBrands[idx].id;
     showStep('s-brand-intro'); setProgress(28+idx*12);
   }
   document.getElementById('btn-bi-back').addEventListener('click', function(){ if(ratingIdx>0)showBrandIntro(ratingIdx-1); else{showStep('s-transition');setProgress(20);} });
@@ -341,7 +341,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function renderRating(idx) {
     ratingIdx=idx; var brand=shuffledBrands[idx];
     document.getElementById('s2-step').textContent='Adım 3 / 5 — Marka '+(idx+1)+' / '+shuffledBrands.length;
-    document.getElementById('s2-brand-above').querySelector('span').textContent=brand.id;
+    document.getElementById('s2-brand-above').querySelector('span').textContent=brand.label||brand.id;
     var html='<div class="criteria-list">';
     criteria.forEach(function(c){
       html+='<div class="criterion"><div class="crit-label"><span class="crit-emoji">'+c.emoji+'</span>'+c.label+'</div>';
@@ -385,7 +385,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var c=document.getElementById('pick-cards'); c.innerHTML='';
     shuffle(brands).forEach(function(b){
       var d=document.createElement('div'); d.className='pick-card';
-      d.innerHTML='<div class="pc-visual"><div class="vname">'+b.id+'</div></div>';
+      d.innerHTML='<div class="pc-visual"><div class="vname">'+(b.label||b.id)+'</div></div>';
       d.addEventListener('click',function(){document.querySelectorAll('.pick-card').forEach(function(x){x.classList.remove('sel');});d.classList.add('sel');answers.pick=b.id;document.getElementById('btn-s3-next').classList.add('on');});
       c.appendChild(d);
     });
@@ -398,7 +398,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('btn-s3-next').addEventListener('click', function(){
     if(!answers.pick) return; setProgress(90);
     if(answers.pick==='none') showStep('s4a');
-    else{document.getElementById('s4b-title').innerHTML='<strong style="color:#b4906a">'+answers.pick+'</strong> sende ne çağrıştırıyor?';showStep('s4b');}
+    else{var pickedBrand=brands.find(function(x){return x.id===answers.pick;});document.getElementById('s4b-title').innerHTML='<strong style="color:#b4906a">'+(pickedBrand?pickedBrand.label||pickedBrand.id:answers.pick)+'</strong> sende ne çağrıştırıyor?';showStep('s4b');}
   });
 
   // S4
